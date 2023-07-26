@@ -1,5 +1,5 @@
 import './App.css';
-import { Header } from './Header/Header';
+import { Header } from './components/Header/Header';
 import { Register } from './pages/userForms/Register/Register';  
 import { Login } from './pages/userForms/Login/Login';
 import { useState } from 'react';
