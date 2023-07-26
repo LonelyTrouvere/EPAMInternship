@@ -1,0 +1,8 @@
+.courses{
+    height: 570px;
+    overflow: scroll;
+}
+
+.courses::-webkit-scrollbar {
+    display: none;
+  }
