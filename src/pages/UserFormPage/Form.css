@@ -19,3 +19,7 @@
     margin-left: 25%;
     width: 40%;
 }
+
+.form > p > a {
+    text-decoration: none;
+}

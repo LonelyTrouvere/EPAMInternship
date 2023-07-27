@@ -1,10 +1,12 @@
 import './Button.css';
 
-const Button = ({ text, onClick, className }) => {
+const Button = (props) => {
+	const { text, onClick, className } = props;
 	return (
 		<button
-			className={className + ' custom-button'}
 			type='button'
+			{...props}
+			className={className + ' custom-button'}
 			onClick={onClick}
 		>
 			{text}

@@ -1,10 +1,9 @@
 import './App.css';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header/Header';
-import { Register } from './pages/userForms/Register/Register';
-import { Login } from './pages/userForms/Login/Login';
-import { useState } from 'react';
-import { CourseContext, AuthorContext } from './contexts/context';
-import { Main } from './pages/MainPage/Main';
+import { UserFormPage } from './pages/UserFormPage/UserFormPage';
+import { CourseContext, AuthorContext, UserContext } from './contexts/context';
+import { MainPage } from './pages/MainPage/MainPage';
 import { Routes, Route } from 'react-router-dom';
 
 const mockedCoursesList = [
@@ -67,17 +66,49 @@ const mockedAuthorsList = [
 function App() {
 	const [courseList, setCourseList] = useState(mockedCoursesList);
 	const [authorList, setAuthorList] = useState(mockedAuthorsList);
+	const [logedUser, setLogedUser] = useState({
+		token: localStorage.getItem('token'),
+		user: null,
+	});
+
+	useEffect(() => {
+		if (logedUser.token) {
+			const response = fetch('http://localhost:4000/users/me', {
+				method: 'GET',
+				headers: {
+					'content-type': 'application/json',
+					authorization: `Bearer ${logedUser.token}`,
+				},
+			})
+				.then((data) => data.json())
+				.then((data) =>
+					setLogedUser({
+						...logedUser,
+						user: data.result,
+					})
+				);
+		}
+	}, []);
+
 	return (
 		<CourseContext.Provider value={{ list: courseList, set: setCourseList }}>
 			<AuthorContext.Provider value={{ list: authorList, set: setAuthorList }}>
-				<Header />
-				<div className='main'>
-					<Routes>
-						<Route path='/' element={<Main />} />
-						<Route path='/registration' element={<Register />} />
-						<Route path='/login' element={<Login />} />
-					</Routes>
-				</div>
+				<UserContext.Provider value={{ info: logedUser, set: setLogedUser }}>
+					<Header />
+					<div className='main'>
+						<Routes>
+							<Route path='/' element={<MainPage />} />
+							<Route
+								path='/registration'
+								element={<UserFormPage key={'reg'} selectedForm={'register'} />}
+							/>
+							<Route
+								path='/login'
+								element={<UserFormPage key={'log'} selectedForm={'login'} />}
+							/>
+						</Routes>
+					</div>
+				</UserContext.Provider>
 			</AuthorContext.Provider>
 		</CourseContext.Provider>
 	);

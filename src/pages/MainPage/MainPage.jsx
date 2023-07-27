@@ -2,7 +2,7 @@ import { CourseList } from '../../components/CourseList/CourseList';
 import { CourseForm } from '../../components/CourseForm/CourseForm';
 import { useState } from 'react';
 
-const Main = () => {
+const MainPage = () => {
 	const [view, setView] = useState('course');
 	const handleView = () => {
 		view === 'course' ? setView('form') : setView('course');
@@ -19,4 +19,4 @@ const Main = () => {
 	);
 };
 
-export { Main };
+export { MainPage };
