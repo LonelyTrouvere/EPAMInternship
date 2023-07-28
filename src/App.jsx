@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header/Header';
-import { UserFormPage } from './pages/UserFormPage/UserFormPage';
+import { Login } from './pages/userFormPage/Login/Login';
+import { Register } from './pages/userFormPage/Register/Register';
 import { CourseContext, AuthorContext, UserContext } from './contexts/context';
 import { MainPage } from './pages/MainPage/MainPage';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -84,16 +85,8 @@ function App() {
 						<Routes>
 							<Route path='/' element={<MainPage />} />
 							<Route element={<ProtectedRoute token={!logedUser.token} />}>
-								<Route
-									path='/registration'
-									element={
-										<UserFormPage key={'reg'} selectedForm={'register'} />
-									}
-								/>
-								<Route
-									path='/login'
-									element={<UserFormPage key={'log'} selectedForm={'login'} />}
-								/>
+								<Route path='/registration' element={<Register />} />
+								<Route path='/login' element={<Login />} />
 							</Route>
 							<Route element={<ProtectedRoute token={logedUser.token} />}>
 								<Route path='/courses' element={<CourseList />} />
