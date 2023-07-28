@@ -4,7 +4,10 @@ import { Header } from './components/Header/Header';
 import { UserFormPage } from './pages/UserFormPage/UserFormPage';
 import { CourseContext, AuthorContext, UserContext } from './contexts/context';
 import { MainPage } from './pages/MainPage/MainPage';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { CourseList } from './components/CourseList/CourseList';
+import { CourseForm } from './components/CourseForm/CourseForm';
+import { ProtectedRoute } from './components/common/ProtectedRoute/ProtectedRoute';
 
 const mockedCoursesList = [
 	{
@@ -68,27 +71,8 @@ function App() {
 	const [authorList, setAuthorList] = useState(mockedAuthorsList);
 	const [logedUser, setLogedUser] = useState({
 		token: localStorage.getItem('token'),
-		user: null,
+		name: localStorage.getItem('name'),
 	});
-
-	useEffect(() => {
-		if (logedUser.token) {
-			const response = fetch('http://localhost:4000/users/me', {
-				method: 'GET',
-				headers: {
-					'content-type': 'application/json',
-					authorization: `Bearer ${logedUser.token}`,
-				},
-			})
-				.then((data) => data.json())
-				.then((data) =>
-					setLogedUser({
-						...logedUser,
-						user: data.result,
-					})
-				);
-		}
-	}, []);
 
 	return (
 		<CourseContext.Provider value={{ list: courseList, set: setCourseList }}>
@@ -98,14 +82,22 @@ function App() {
 					<div className='main'>
 						<Routes>
 							<Route path='/' element={<MainPage />} />
-							<Route
-								path='/registration'
-								element={<UserFormPage key={'reg'} selectedForm={'register'} />}
-							/>
-							<Route
-								path='/login'
-								element={<UserFormPage key={'log'} selectedForm={'login'} />}
-							/>
+							<Route element={<ProtectedRoute token={!logedUser.token} />}>
+								<Route
+									path='/registration'
+									element={
+										<UserFormPage key={'reg'} selectedForm={'register'} />
+									}
+								/>
+								<Route
+									path='/login'
+									element={<UserFormPage key={'log'} selectedForm={'login'} />}
+								/>
+							</Route>
+							<Route element={<ProtectedRoute token={logedUser.token} />}>
+								<Route path='/courses' element={<CourseList />} />
+								<Route path='/courses/add' element={<CourseForm />} />
+							</Route>
 						</Routes>
 					</div>
 				</UserContext.Provider>

@@ -4,15 +4,20 @@ import { CourseContext } from '../../contexts/context';
 import { CourseCard } from './CourseCard/CourseCard';
 import { SearchBar } from './SearchBar/SearchBar';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-const CourseList = ({ handleView }) => {
+const CourseList = () => {
 	const courses = useContext(CourseContext);
 
 	const [searchCourses, setSearchCourses] = useState([]);
+	const redirect = useNavigate();
 
 	return (
 		<div className='course-page'>
-			<SearchBar set={setSearchCourses} onClick={handleView} />
+			<SearchBar
+				set={setSearchCourses}
+				onClick={() => redirect('/courses/add')}
+			/>
 			<div className='courses'>
 				{!searchCourses.length
 					? courses.list.map((item) => {

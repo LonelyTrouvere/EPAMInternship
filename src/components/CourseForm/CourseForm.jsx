@@ -4,10 +4,13 @@ import { Button } from '../../components/common/Button/Button';
 import { Input } from '../../components/common/Input/Input';
 import { AuthorContext, CourseContext } from '../../contexts/context';
 import { v4 } from 'uuid';
+import { useNavigate } from 'react-router';
 
-const CourseForm = ({ setCoursePage }) => {
+const CourseForm = () => {
 	const authors = useContext(AuthorContext);
 	const courses = useContext(CourseContext);
+
+	const redirect = useNavigate();
 
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -92,7 +95,7 @@ const CourseForm = ({ setCoursePage }) => {
 			setCourseAuthors([]);
 
 			courses.set([...courses.list, newCourse]);
-			setCoursePage('course');
+			redirect('/courses');
 		}
 	};
 
@@ -103,7 +106,7 @@ const CourseForm = ({ setCoursePage }) => {
 		setNewAuthor('');
 		setCourseAuthors([]);
 
-		setCoursePage('course');
+		redirect('/courses');
 	};
 
 	return (

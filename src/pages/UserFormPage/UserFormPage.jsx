@@ -36,6 +36,7 @@ const UserFormPage = ({ selectedForm }) => {
 	const title = selectedForm === 'login' ? login : registration;
 
 	const handleChange = (newState, setState) => {
+		setBoxMessage('');
 		setState(newState);
 	};
 
@@ -55,33 +56,21 @@ const UserFormPage = ({ selectedForm }) => {
 		})
 			.then((data) => data.json())
 			.then((data) => {
-				localStorage.setItem('token', data.result.replace('Bearer ', ''));
-				logedUser.set({
-					...logedUser.info,
-					token: data.result.replace('Bearer ', ''),
-				});
+				if (data.successful) {
+					localStorage.setItem('token', data.result.replace('Bearer ', ''));
+					localStorage.setItem('name', data.user.name);
+					logedUser.set({
+						name: data.user.name,
+						token: data.result.replace('Bearer ', ''),
+					});
+				} else {
+					throw new Error('Something went wrong');
+				}
 			})
 			.then(() => {
-				getUser();
 				redirect('/');
-			});
-	};
-
-	const getUser = () => {
-		const response = fetch('http://localhost:4000/users/me', {
-			method: 'GET',
-			headers: {
-				'content-type': 'application/json',
-				authorization: `Bearer ${localStorage.getItem('token')}`,
-			},
-		})
-			.then((data) => data.json())
-			.then((data) =>
-				logedUser.set({
-					token: localStorage.getItem('token'),
-					user: data.result,
-				})
-			);
+			})
+			.catch((err) => setBoxMessage(err.toString()));
 	};
 
 	const handleRegister = async (e) => {
