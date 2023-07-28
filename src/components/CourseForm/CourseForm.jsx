@@ -5,6 +5,7 @@ import { Input } from '../../components/common/Input/Input';
 import { AuthorContext, CourseContext } from '../../contexts/context';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
+import { displayDuration } from '../../utils/time/displayDuration';
 
 const CourseForm = () => {
 	const authors = useContext(AuthorContext);
@@ -17,10 +18,7 @@ const CourseForm = () => {
 	const [newAuthorName, setNewAuthor] = useState('');
 	const [duration, setDuration] = useState(0);
 	const [courseAuthors, setCourseAuthors] = useState([]);
-	let hours = Math.floor(duration / 60);
-	let minutes = duration - hours * 60;
-	if (hours < 10) hours = '0' + hours;
-	if (minutes < 10) minutes = '0' + minutes;
+	let { hours, minutes } = displayDuration(duration);
 
 	const handleTitel = (e) => {
 		setTitle(e.target.value);

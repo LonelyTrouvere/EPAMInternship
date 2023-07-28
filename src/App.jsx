@@ -8,6 +8,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CourseList } from './components/CourseList/CourseList';
 import { CourseForm } from './components/CourseForm/CourseForm';
 import { ProtectedRoute } from './components/common/ProtectedRoute/ProtectedRoute';
+import { CourseInfo } from './components/CourseList/CourseInfo/CourseInfo';
 
 const mockedCoursesList = [
 	{
@@ -97,6 +98,7 @@ function App() {
 							<Route element={<ProtectedRoute token={logedUser.token} />}>
 								<Route path='/courses' element={<CourseList />} />
 								<Route path='/courses/add' element={<CourseForm />} />
+								<Route path='/courses/:id' element={<CourseInfo />} />
 							</Route>
 						</Routes>
 					</div>

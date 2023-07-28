@@ -2,13 +2,14 @@ import './CourseCard.css';
 import { Button } from '../../common/Button/Button';
 import { useContext } from 'react';
 import { AuthorContext } from '../../../contexts/context';
+import { useNavigate } from 'react-router';
+import { displayDuration } from '../../../utils/time/displayDuration';
 
 const CourseCard = ({ course }) => {
 	const authors = useContext(AuthorContext);
-	let hours = Math.floor(course.duration / 60);
-	let minutes = course.duration - hours * 60;
-	if (hours < 10) hours = '0' + hours;
-	if (minutes < 10) minutes = '0' + minutes;
+	let { hours, minutes } = displayDuration(course.duration);
+
+	const redirect = useNavigate();
 
 	return (
 		<div className='card'>
@@ -34,7 +35,12 @@ const CourseCard = ({ course }) => {
 					<b>Created:</b> {course.creationDate}
 				</p>
 				<div className='show-course'>
-					<Button text='Show course' />
+					<Button
+						text='Show course'
+						onClick={() => {
+							redirect(`/courses/${course.id}`);
+						}}
+					/>
 				</div>
 			</div>
 		</div>
