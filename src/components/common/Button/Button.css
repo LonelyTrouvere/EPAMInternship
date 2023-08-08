@@ -1,13 +1,13 @@
-.custom-button{
-    cursor:pointer;
-    text-align: center;
-    text-decoration: none;
-    background-color: white;
-    color: black;
-    border: 2px solid plum; 
-    padding: 8px 32px;
+.custom-button {
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  border: 2px solid plum;
+  padding: 8px 32px;
 }
 
-.custom-button:hover{
-    background-color: rgb(214, 192, 214);
+.custom-button:hover {
+  background-color: rgb(214, 192, 214);
 }

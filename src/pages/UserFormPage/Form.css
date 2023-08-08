@@ -1,25 +1,25 @@
-.form{
-    width: 35%;
-    position: relative;
-    left: 35%;
-    top: 15%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.form {
+  width: 35%;
+  position: relative;
+  left: 35%;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.form-header{
-    display: block;
-    font-size: 25px;
-    padding-bottom: 10px;
+.form-header {
+  display: block;
+  font-size: 25px;
+  padding-bottom: 10px;
 }
 
-.form-button{
-    margin-top: 5px;
-    margin-left: 25%;
-    width: 40%;
+.form-button {
+  margin-top: 5px;
+  margin-left: 25%;
+  width: 40%;
 }
 
 .form > p > a {
-    text-decoration: none;
+  text-decoration: none;
 }

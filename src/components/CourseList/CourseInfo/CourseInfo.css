@@ -1,21 +1,21 @@
-.main-info-holder{
-    margin-top: 30px;
-    font-size: 20px;
+.main-info-holder {
+  margin-top: 30px;
+  font-size: 20px;
 }
 
-.main-info-holder > h1{
-    text-align: center;
-    margin-bottom: 40px;
+.main-info-holder > h1 {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.main-info{
-    height: 100%;
-    line-height: 40px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 15%;
+.main-info {
+  height: 100%;
+  line-height: 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15%;
 }
 
-.info-descriptinon{
-    max-width: 75%;
+.info-descriptinon {
+  max-width: 75%;
 }
