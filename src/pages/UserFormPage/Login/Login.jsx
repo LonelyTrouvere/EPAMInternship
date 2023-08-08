@@ -6,8 +6,6 @@ import { Input } from '../../../components/common/Input/Input';
 import { Button } from '../../../components/common/Button/Button';
 import { UserContext } from '../../../contexts/context';
 
-const baseUrl = 'http://localhost:4000';
-
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -29,7 +27,7 @@ const Login = () => {
 			email,
 		};
 
-		fetch(`${baseUrl}/login`, {
+		fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
 			method: 'POST',
 			body: JSON.stringify(user),
 			headers: {

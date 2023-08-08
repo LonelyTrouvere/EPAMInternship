@@ -4,8 +4,6 @@ import { MessageBox } from '../../../components/common/MessageBox/MessageBox';
 import { Button } from '../../../components/common/Button/Button';
 import { Input } from '../../../components/common/Input/Input';
 
-const baseUrl = 'http://localhost:4000';
-
 const Register = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -26,7 +24,7 @@ const Register = () => {
 			password,
 			email,
 		};
-		fetch(`${baseUrl}/register`, {
+		fetch(`${process.env.REACT_APP_BASE_URL}/register`, {
 			method: 'POST',
 			body: JSON.stringify(user),
 			headers: {

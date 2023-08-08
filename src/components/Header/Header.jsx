@@ -10,7 +10,7 @@ const Header = () => {
 	const redirect = useNavigate();
 
 	const handleLogout = () => {
-		fetch('http://localhost:4000/logout', {
+		fetch(`${process.env.REACT_APP_BASE_URL}/logout`, {
 			method: 'DELETE',
 			headers: {
 				authorization: `Bearer ${user.info.token}`,
