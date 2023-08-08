@@ -68,7 +68,7 @@ const mockedAuthorsList = [
 	},
 ];
 
-function App() {
+const App = () => {
 	const [courseList, setCourseList] = useState(mockedCoursesList);
 	const [authorList, setAuthorList] = useState(mockedAuthorsList);
 	const [logedUser, setLogedUser] = useState({
@@ -99,6 +99,6 @@ function App() {
 			</AuthorContext.Provider>
 		</CourseContext.Provider>
 	);
-}
+};
 
 export default App;
