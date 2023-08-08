@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserContext } from '../../../contexts/context';
 import { MessageBox } from '../../../components/common/MessageBox/MessageBox';
 import { Button } from '../../../components/common/Button/Button';
 import { Input } from '../../../components/common/Input/Input';
@@ -15,8 +14,6 @@ const Register = () => {
 
 	const redirect = useNavigate();
 
-	const logedUser = useContext(UserContext);
-
 	const handleChange = (newState, setState) => {
 		setBoxMessage('');
 		setState(newState);
@@ -29,7 +26,7 @@ const Register = () => {
 			password,
 			email,
 		};
-		const response = fetch(`${baseUrl}/register`, {
+		fetch(`${baseUrl}/register`, {
 			method: 'POST',
 			body: JSON.stringify(user),
 			headers: {

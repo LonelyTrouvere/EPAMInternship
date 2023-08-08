@@ -29,7 +29,7 @@ const Login = () => {
 			email,
 		};
 
-		const response = fetch(`${baseUrl}/login`, {
+		fetch(`${baseUrl}/login`, {
 			method: 'POST',
 			body: JSON.stringify(user),
 			headers: {

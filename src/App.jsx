@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Header } from './components/Header/Header';
 import { Login } from './pages/userFormPage/Login/Login';
 import { Register } from './pages/userFormPage/Register/Register';
 import { CourseContext, AuthorContext, UserContext } from './contexts/context';
 import { MainPage } from './pages/MainPage/MainPage';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { CourseList } from './components/CourseList/CourseList';
 import { CourseForm } from './components/CourseForm/CourseForm';
 import { ProtectedRoute } from './components/common/ProtectedRoute/ProtectedRoute';
