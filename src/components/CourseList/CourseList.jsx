@@ -11,7 +11,7 @@ const CourseList = () => {
 	const redirect = useNavigate();
 
 	return (
-		<div className='course-page'>
+		<div className='course-page text-lg'>
 			<SearchBar
 				set={setSearchCourses}
 				onClick={() => redirect('/courses/add')}

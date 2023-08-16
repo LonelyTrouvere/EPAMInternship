@@ -5,6 +5,7 @@ import { AuthorContext, CourseContext } from '../../contexts/context';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
 import { displayDuration } from '../../utils/time/displayDuration';
+import { Textarea } from 'components/common/Textarea/Textarea';
 
 const CourseForm = () => {
 	const authors = useContext(AuthorContext);
@@ -96,102 +97,94 @@ const CourseForm = () => {
 		}
 	};
 
-	const onReturn = () => {
-		setTitle('');
-		setDescription('');
-		setDuration('');
-		setNewAuthor('');
-		setCourseAuthors([]);
-
-		redirect('/courses');
-	};
-
 	return (
-		<form className='create-course'>
-			<div className='spacing'>
+		<form className='text-lg'>
+			<div className='relative mb-5'>
 				<Input
 					labelText='Title'
 					type='text'
+					className='w-[32rem]'
 					placeholder='Enter title...'
 					onChange={handleTitel}
 				/>
-				<Button text='Return' className='float-right' onClick={onReturn} />
 				<Button
 					text='Create course'
-					className='float-right'
+					className='absolute right-0'
 					onClick={createCourse}
 				/>
 			</div>
-			<Input
+			<Textarea
 				labelText='Description'
-				type='textarea'
 				placeholder='Enter description'
-				className='form-text-area'
+				className='w-full h-32 mb-5'
 				onChange={handleDescription}
 			/>
-			<div className='authors-area'>
-				<div className='create-author'>
-					<h3 className='form-header'>Add author</h3>
+			<div className='grid gap-8 grid-rows-2 grid-cols-2'>
+				<div className='mb-10'>
+					<h3 className='font-bold text-2xl text-center mb-4'>Add author</h3>
 					<Input
 						type='text'
 						labelText='Author name'
 						placeholder='Enter author name...'
+						className='block w-[90%] mb-6'
 						onChange={handleNewAuthor}
 					/>
 					<Button
 						text='Create author'
-						className='author-create-button'
+						className='ml-[40%]'
 						onClick={addNewAuthor}
 					/>
 				</div>
-				<div className='author-list'>
-					<h3 className='form-header'>Authors</h3>
+				<div className='flex flex-col'>
+					<h3 className='font-bold text-2xl text-center mb-4'>Authors</h3>
 					{authors.list
 						.filter((item) => !courseAuthors.includes(item))
 						.map((item) => {
 							return (
-								<div key={item.id} className='add-author'>
-									<p className='float-left author-name'>{item.name}</p>
+								<div key={item.id} className='my-4 relative'>
+									<p className='inline-block'>{item.name}</p>
 									<Button
 										text='Add author'
-										className='float-right'
+										className='absolute right-0'
 										onClick={() => addCourseAuthor(item)}
 									/>
 								</div>
 							);
 						})}
 				</div>
-				<div className='course-author-list'>
-					<h3 className='form-header'>Course authors</h3>
+				<div>
+					<h3 className='font-bold text-2xl text-center mb-4'>Duration</h3>
+					<Input
+						labelText='Duration'
+						type='number'
+						placeholder='Enter duration in minutes...'
+						className='w-[90%] mb-5'
+						onChange={handleDuration}
+					/>
+					<p className='text-3xl'>
+						<b>Duration:</b> {hours}:{minutes} hours
+					</p>
+				</div>
+				<div className='flex flex-col'>
+					<h3 className='font-bold text-2xl text-center mb-4'>
+						Course authors
+					</h3>
 					{!courseAuthors.length ? (
-						<h3>List is empty</h3>
+						<h3 className='text-center'>List is empty</h3>
 					) : (
 						courseAuthors.map((item) => {
 							return (
-								<div key={item.id} className='add-author'>
-									<p className='float-left author-name'>{item.name}</p>
+								<div key={item.id} className='my-4 relative'>
+									<p className='inline-block'>{item.name}</p>
 									<Button
 										text='Delete author'
-										className='float-right'
+										className='absolute right-0'
 										onClick={() => removeAuthor(item)}
 									/>
 								</div>
 							);
 						})
 					)}
-				</div>
-				<div className='duration-area'>
-					<h3 className='form-header'>Duration</h3>
-					<Input
-						labelText='Duration'
-						type='number'
-						placeholder='Enter duration in minutes...'
-						className='spacing'
-						onChange={handleDuration}
-					/>
-					<p className='duration'>
-						<b>Duration:</b> {hours}:{minutes} hours
-					</p>
 				</div>
 			</div>
 		</form>

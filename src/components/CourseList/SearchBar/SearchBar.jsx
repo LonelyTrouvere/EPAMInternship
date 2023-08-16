@@ -23,18 +23,18 @@ const SearchBar = (props) => {
 	};
 
 	return (
-		<div className='course-control'>
-			<div className='search-bar'>
+		<div className='relative'>
+			<div className='inline-block'>
 				<Input
 					placeholder='Enter course name or id'
 					onChange={handleChange}
-					className='search-input'
+					className='w-[32rem] mr-5 inline'
 				/>
-				<div className='search-button'>
+				<div className='inline-block'>
 					<Button text='Search' onClick={handleSerach} />
 				</div>
 			</div>
-			<div className='add-new-course'>
+			<div className='inline-block absolute right-0'>
 				<Button text='Add new course' onClick={props.onClick} />
 			</div>
 		</div>

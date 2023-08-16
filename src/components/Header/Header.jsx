@@ -26,13 +26,13 @@ const Header = () => {
 	};
 
 	return (
-		<div className='head'>
-			<div className='logo-holder'>
+		<div className='relative flex items-center border-2 border-orange-400 py-2'>
+			<div className='h-20'>
 				<Link to='/'>
 					<Logo />
 				</Link>
 			</div>
-			<div className='far-end'>
+			<div className='absolute right-0 mr-5'>
 				{!user.info.token && (
 					<>
 						<Link to='/login'>
@@ -45,7 +45,7 @@ const Header = () => {
 				)}
 				{user.info.name && (
 					<>
-						<span>{user.info.name}</span>
+						<span className='text-2xl mr-4'>{user.info.name}</span>
 						<Button text='Log out' onClick={handleLogout}></Button>
 					</>
 				)}

@@ -11,12 +11,12 @@ const CourseCard = ({ course }) => {
 	const redirect = useNavigate();
 
 	return (
-		<div className='card'>
-			<div className='description'>
-				<h3 className='course-title'>{course.title}</h3>
-				<p>{course.description}</p>
+		<div className='p-4 pt-6 my-6 flex gap-6 border-2 border-green-500'>
+			<div className='w-3/4'>
+				<h3 className='font-bold text-3xl mb-6'>{course.title}</h3>
+				<p className='leading-7'>{course.description}</p>
 			</div>
-			<div className='aditional'>
+			<div className='leading-9 w-1/4'>
 				<p>
 					<b>Authors:</b>{' '}
 					{authors.list
@@ -33,9 +33,10 @@ const CourseCard = ({ course }) => {
 				<p>
 					<b>Created:</b> {course.creationDate}
 				</p>
-				<div className='show-course'>
+				<div className='ml-[25%]'>
 					<Button
 						text='Show course'
+						className='mt-3'
 						onClick={() => {
 							redirect(`/courses/${course.id}`);
 						}}

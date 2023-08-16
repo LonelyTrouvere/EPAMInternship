@@ -27,7 +27,7 @@ const App = () => {
 			<AuthorContext.Provider value={{ list: authorList, set: setAuthorList }}>
 				<UserContext.Provider value={{ info: logedUser, set: setLogedUser }}>
 					<Header />
-					<div className='main'>
+					<div className='border-2 border-blue-500 h-full p-5'>
 						<Routes>
 							<Route path='/' element={<MainPage />} />
 							<Route element={<ProtectedRoute token={!logedUser.token} />}>
