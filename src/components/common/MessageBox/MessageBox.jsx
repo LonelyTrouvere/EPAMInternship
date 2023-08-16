@@ -1,4 +1,3 @@
-import './MessageBox.css';
 import { v4 } from 'uuid';
 
 const MessageBox = ({ status, message }) => {

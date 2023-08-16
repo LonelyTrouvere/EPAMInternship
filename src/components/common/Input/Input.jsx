@@ -1,5 +1,3 @@
-import './Input.css';
-
 const Input = (props) => {
 	const { labelText, type, ...inputProps } = props;
 

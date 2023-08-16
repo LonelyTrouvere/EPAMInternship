@@ -1,4 +1,3 @@
-import './MainPage.css';
 import { Button } from '../../components/common/Button/Button';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';

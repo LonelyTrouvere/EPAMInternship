@@ -1,4 +1,3 @@
-import './CourseForm.css';
 import { useContext, useState } from 'react';
 import { Button } from '../../components/common/Button/Button';
 import { Input } from '../../components/common/Input/Input';

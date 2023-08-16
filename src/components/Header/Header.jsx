@@ -1,4 +1,3 @@
-import './Header.css';
 import { Logo } from './Logo/Logo';
 import { Button } from '../common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';

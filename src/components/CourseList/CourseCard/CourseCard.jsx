@@ -1,4 +1,3 @@
-import './CourseCard.css';
 import { Button } from '../../common/Button/Button';
 import { useContext } from 'react';
 import { AuthorContext } from '../../../contexts/context';

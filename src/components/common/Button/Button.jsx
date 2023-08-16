@@ -1,5 +1,3 @@
-import './Button.css';
-
 const Button = (props) => {
 	const { text, onClick, className } = props;
 	return (

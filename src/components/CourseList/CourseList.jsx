@@ -1,4 +1,3 @@
-import './CourseList.css';
 import { useContext, useState } from 'react';
 import { CourseContext } from '../../contexts/context';
 import { CourseCard } from './CourseCard/CourseCard';

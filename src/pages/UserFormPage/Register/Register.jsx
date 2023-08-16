@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { MessageBox } from '../../../components/common/MessageBox/MessageBox';
 import { Button } from '../../../components/common/Button/Button';
-import { Input } from '../../../components/common/Input/Input';
+import { Input } from 'components/common/Input/Input';
 
 const Register = () => {
 	const [name, setName] = useState('');

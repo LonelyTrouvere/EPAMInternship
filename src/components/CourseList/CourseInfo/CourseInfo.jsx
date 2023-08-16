@@ -1,4 +1,3 @@
-import './CourseInfo.css';
 import { useNavigate, useParams } from 'react-router';
 import { useContext } from 'react';
 import { AuthorContext, CourseContext } from '../../../contexts/context';

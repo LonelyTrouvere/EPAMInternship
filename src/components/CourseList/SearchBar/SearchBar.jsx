@@ -1,4 +1,3 @@
-import './SerachBar.css';
 import { Button } from '../../common/Button/Button';
 import { Input } from '../../common/Input/Input';
 import { useContext, useState } from 'react';
