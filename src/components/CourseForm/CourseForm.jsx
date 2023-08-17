@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
-import { Button } from '../../components/common/Button/Button';
-import { Input } from '../../components/common/Input/Input';
-import { AuthorContext, CourseContext } from '../../contexts/context';
+import { useState } from 'react';
+import { Button } from 'components/common/Button/Button';
+import { Input } from 'components/common/Input/Input';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
-import { displayDuration } from '../../utils/time/displayDuration';
+import { displayDuration } from 'utils/time/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
+import { useAuthors } from 'utils/hooks/useAuthors';
+import { useCourses } from 'utils/hooks/useCourses';
 
 const CourseForm = () => {
-	const authors = useContext(AuthorContext);
-	const courses = useContext(CourseContext);
+	const authors = useAuthors();
+	const courses = useCourses();
 
 	const redirect = useNavigate();
 

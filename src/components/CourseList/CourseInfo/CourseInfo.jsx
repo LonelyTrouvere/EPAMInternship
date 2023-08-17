@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from 'react-router';
-import { useContext } from 'react';
-import { AuthorContext, CourseContext } from '../../../contexts/context';
-import { Button } from '../../common/Button/Button';
-import { displayDuration } from '../../../utils/time/displayDuration';
+import { Button } from 'components/common/Button/Button';
+import { displayDuration } from 'utils/time/displayDuration';
+import { useCourses } from 'utils/hooks/useCourses';
+import { useAuthors } from 'utils/hooks/useAuthors';
 
 const CourseInfo = () => {
 	const { id } = useParams();
-	const course = useContext(CourseContext).list.find((item) => item.id === id);
-	const courseAuthors = useContext(AuthorContext).list.filter((item) =>
+	const course = useCourses().list.find((item) => item.id === id);
+	const courseAuthors = useAuthors().list.filter((item) =>
 		course.authors.includes(item.id)
 	);
 

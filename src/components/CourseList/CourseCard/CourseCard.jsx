@@ -1,11 +1,10 @@
-import { Button } from '../../common/Button/Button';
-import { useContext } from 'react';
-import { AuthorContext } from '../../../contexts/context';
+import { Button } from 'components/common/Button/Button';
 import { useNavigate } from 'react-router';
-import { displayDuration } from '../../../utils/time/displayDuration';
+import { displayDuration } from 'utils/time/displayDuration';
+import { useAuthors } from 'utils/hooks/useAuthors';
 
 const CourseCard = ({ course }) => {
-	const authors = useContext(AuthorContext);
+	const authors = useAuthors();
 	let { hours, minutes } = displayDuration(course.duration);
 
 	const redirect = useNavigate();

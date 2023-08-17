@@ -1,8 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Input } from '../../../components/common/Input/Input';
-import { Button } from '../../../components/common/Button/Button';
-import { UserContext } from '../../../contexts/context';
+import { Input } from 'components/common/Input/Input';
+import { Button } from 'components/common/Button/Button';
+import { useUser } from 'utils/hooks/useUser';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ const Login = () => {
 
 	const redirect = useNavigate();
 
-	const logedUser = useContext(UserContext);
+	const logedUser = useUser();
 
 	const handleChange = (newState, setState) => {
 		setState(newState);

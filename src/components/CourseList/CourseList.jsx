@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
-import { CourseContext } from '../../contexts/context';
+import { useState } from 'react';
 import { CourseCard } from './CourseCard/CourseCard';
 import { SearchBar } from './SearchBar/SearchBar';
 import { useNavigate } from 'react-router';
+import { useCourses } from 'utils/hooks/useCourses';
 
 const CourseList = () => {
-	const courses = useContext(CourseContext);
+	const courses = useCourses();
 
 	const [searchCourses, setSearchCourses] = useState([]);
 	const redirect = useNavigate();

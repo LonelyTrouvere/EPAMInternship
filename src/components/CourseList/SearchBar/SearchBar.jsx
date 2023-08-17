@@ -1,11 +1,11 @@
-import { Button } from '../../common/Button/Button';
-import { Input } from '../../common/Input/Input';
-import { useContext, useState } from 'react';
-import { CourseContext } from '../../../contexts/context';
+import { Button } from 'components/common/Button/Button';
+import { Input } from 'components/common/Input/Input';
+import { useState } from 'react';
+import { useCourses } from 'utils/hooks/useCourses';
 
 const SearchBar = (props) => {
 	const [search, setSearch] = useState('');
-	const courses = useContext(CourseContext);
+	const courses = useCourses();
 
 	const handleChange = (e) => {
 		if (e.target.value === '') props.set([]);

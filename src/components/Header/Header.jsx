@@ -1,11 +1,10 @@
 import { Logo } from './Logo/Logo';
-import { Button } from '../common/Button/Button';
+import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { UserContext } from '../../contexts/context';
+import { useUser } from 'utils/hooks/useUser';
 
 const Header = () => {
-	const user = useContext(UserContext);
+	const user = useUser();
 	const redirect = useNavigate();
 
 	const handleLogout = () => {
