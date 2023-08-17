@@ -23,11 +23,11 @@ const CourseInfo = () => {
 					redirect('/courses');
 				}}
 			/>
-			<div className='main-info-holder'>
-				<h1>{course.title}</h1>
-				<div className='main-info'>
-					<div className='info-description'>{course.description}</div>
-					<div className='info-side'>
+			<div className='text-xl'>
+				<h1 className='text-center text-5xl font-bold mb-16'>{course.title}</h1>
+				<div className='flex gap-10'>
+					<div className='w-2/3 leading-7'>{course.description}</div>
+					<div className='w-1/3 leading-10'>
 						<div>
 							<b>ID:</b> {course.id}
 						</div>
@@ -37,8 +37,8 @@ const CourseInfo = () => {
 						<div>
 							<b>Created:</b> {course.creationDate}
 						</div>
-						<div className='info-authors'>
-							<span>
+						<div className='leading-8'>
+							<span className='block mb-2'>
 								<b>Authosr:</b>{' '}
 							</span>
 							{courseAuthors.map((item) => (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { MessageBox } from '../../../components/common/MessageBox/MessageBox';
 import { Button } from '../../../components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
 
@@ -8,12 +7,10 @@ const Register = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [boxMessage, setBoxMessage] = useState('');
 
 	const redirect = useNavigate();
 
 	const handleChange = (newState, setState) => {
-		setBoxMessage('');
 		setState(newState);
 	};
 
@@ -39,44 +36,53 @@ const Register = () => {
 					redirect('/login');
 				}
 			})
-			.catch((err) => setBoxMessage(err.toString()));
+			.catch((err) => console.log(err.toString()));
 	};
 
 	return (
-		<>
-			{boxMessage && <MessageBox status='error' message={boxMessage} />}
-			<form className='form' onSubmit={handleRegister}>
-				<h1 className='form-header'>Registration</h1>
-				<Input
-					labelText='Name'
-					type='text'
-					placeholder='Enter name'
-					onChange={(e) => {
-						handleChange(e.target.value, setName);
-					}}
-				/>
-				<Input
-					labelText='Email'
-					type='text'
-					placeholder='Enter email'
-					onChange={(e) => {
-						handleChange(e.target.value, setEmail);
-					}}
-				/>
-				<Input
-					labelText='Password'
-					type='password'
-					placeholder='Enter password'
-					onChange={(e) => {
-						handleChange(e.target.value, setPassword);
-					}}
-				/>
-				<Button text='Registration' className='form-button' type='submit' />
-				<p>
-					If you have an account you can <Link to='/login'>Log in</Link>
-				</p>
-			</form>
-		</>
+		<form
+			className='relative w-fit top-[4rem] left-[27%] text-xl'
+			onSubmit={handleRegister}
+		>
+			<h1 className='text-3xl font-bold text-center mb-8'>Registration</h1>
+			<Input
+				labelText='Name'
+				type='text'
+				placeholder='Enter name'
+				className='w-[40rem] mb-6'
+				onChange={(e) => {
+					handleChange(e.target.value, setName);
+				}}
+			/>
+			<Input
+				labelText='Email'
+				type='text'
+				placeholder='Enter email'
+				className='w-[40rem] mb-6'
+				onChange={(e) => {
+					handleChange(e.target.value, setEmail);
+				}}
+			/>
+			<Input
+				labelText='Password'
+				type='password'
+				placeholder='Enter password'
+				className='w-[40rem] mb-6'
+				onChange={(e) => {
+					handleChange(e.target.value, setPassword);
+				}}
+			/>
+			<Button text='Registration' className='block mb-3 m-auto' type='submit' />
+			<p className='text-base text-center'>
+				If you have an account you can{' '}
+				<Link
+					to='/login'
+					className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
+				>
+					Log in
+				</Link>
+			</p>
+		</form>
 	);
 };
 

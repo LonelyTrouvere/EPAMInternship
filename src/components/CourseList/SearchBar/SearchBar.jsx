@@ -28,7 +28,7 @@ const SearchBar = (props) => {
 				<Input
 					placeholder='Enter course name or id'
 					onChange={handleChange}
-					className='w-[32rem] mr-5 inline'
+					className='w-96 mr-5 inline'
 				/>
 				<div className='inline-block'>
 					<Button text='Search' onClick={handleSerach} />

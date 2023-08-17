@@ -6,10 +6,10 @@ const MainPage = () => {
 	const redirect = useNavigate();
 
 	return (
-		<div className='mainContainer'>
-			<div className='mainHeader'>
-				<h1>Welcome</h1>
-				<p>
+		<div className='p-5 text-center flex flex-col justify-center items-center'>
+			<div className='text-xl leading-8'>
+				<h1 className='font-bold text-4xl mb-4'>Welcome</h1>
+				<p className='mb-4'>
 					This is a course finding website <br />
 					We are happy to help you find the best and most suiting course for you
 					<br />
@@ -19,8 +19,20 @@ const MainPage = () => {
 			</div>
 			<div className='mainRedirect'>
 				<p>
-					If you are not logged in, please <Link to='/login'>Log in</Link> or{' '}
-					<Link to='/registration'>Sign up</Link>
+					If you are not logged in, please{' '}
+					<Link
+						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
+						to='/login'
+					>
+						Log in
+					</Link>{' '}
+					or{' '}
+					<Link
+						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
+						to='/registration'
+					>
+						Sign up
+					</Link>
 				</p>
 			</div>
 		</div>

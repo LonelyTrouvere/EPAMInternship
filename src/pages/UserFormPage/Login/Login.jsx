@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { MessageBox } from '../../../components/common/MessageBox/MessageBox';
 import { Input } from '../../../components/common/Input/Input';
 import { Button } from '../../../components/common/Button/Button';
 import { UserContext } from '../../../contexts/context';
@@ -8,14 +7,12 @@ import { UserContext } from '../../../contexts/context';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [boxMessage, setBoxMessage] = useState('');
 
 	const redirect = useNavigate();
 
 	const logedUser = useContext(UserContext);
 
 	const handleChange = (newState, setState) => {
-		setBoxMessage('');
 		setState(newState);
 	};
 
@@ -49,18 +46,21 @@ const Login = () => {
 			.then(() => {
 				redirect('/');
 			})
-			.catch((err) => setBoxMessage(err.toString()));
+			.catch((err) => console.log(err));
 	};
 
 	return (
 		<>
-			{boxMessage && <MessageBox status='error' message={boxMessage} />}
-			<form className='form' onSubmit={handleLogin}>
-				<h1 className='form-header'>Log in</h1>
+			<form
+				className='relative w-fit top-[5rem] left-[27%] text-xl'
+				onSubmit={handleLogin}
+			>
+				<h1 className='text-3xl font-bold text-center mb-8'>Log in</h1>
 				<Input
 					labelText='Email'
 					type='text'
 					placeholder='Enter email'
+					className='w-[40rem] mb-6'
 					onChange={(e) => {
 						handleChange(e.target.value, setEmail);
 					}}
@@ -69,14 +69,20 @@ const Login = () => {
 					labelText='Password'
 					type='password'
 					placeholder='Enter password'
+					className='w-[40rem] mb-6'
 					onChange={(e) => {
 						handleChange(e.target.value, setPassword);
 					}}
 				/>
-				<Button text='Log in' className='form-button' type='submit' />
-				<p>
+				<Button text='Log in' className='block mb-3 m-auto' type='submit' />
+				<p className='text-base text-center'>
 					If you don&apos;t an account you can{' '}
-					<Link to='/registration'>Sign up</Link>
+					<Link
+						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
+						to='/registration'
+					>
+						Sign up
+					</Link>
 				</p>
 			</form>
 		</>
