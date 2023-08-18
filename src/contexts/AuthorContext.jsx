@@ -7,7 +7,9 @@ const AuthorContextProvider = ({ children }) => {
 	const [authorList, setAuthorList] = useState(MOCKED_AUTHOR_LIST);
 
 	return (
-		<AuthorContext.Provider value={{ list: authorList, set: setAuthorList }}>
+		<AuthorContext.Provider
+			value={{ authorList: authorList, setAuthorList: setAuthorList }}
+		>
 			{children}
 		</AuthorContext.Provider>
 	);

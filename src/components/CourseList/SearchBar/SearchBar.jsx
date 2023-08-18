@@ -5,7 +5,7 @@ import { useCourses } from 'utils/hooks/useCourses';
 
 const SearchBar = (props) => {
 	const [search, setSearch] = useState('');
-	const courses = useCourses();
+	const [courses, setCourses] = useCourses();
 
 	const handleChange = (e) => {
 		if (e.target.value === '') props.set([]);
@@ -14,7 +14,7 @@ const SearchBar = (props) => {
 
 	const handleSerach = () => {
 		props.set(
-			courses.list.filter(
+			courses.filter(
 				(item) =>
 					item.id === search ||
 					item.title.toLowerCase().includes(search.toLowerCase())

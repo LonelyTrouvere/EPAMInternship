@@ -4,7 +4,7 @@ import { useContext } from 'react';
 const useAuthors = () => {
 	const authors = useContext(AuthorContext);
 
-	return authors;
+	return [authors.authorList, authors.setAuthorList];
 };
 
 export { useAuthors };

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const MainPage = () => {
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	return (
 		<div className='p-5 text-center flex flex-col justify-center items-center'>
@@ -15,9 +15,9 @@ const MainPage = () => {
 					<br />
 					If you are ready, click button below to explore the world of knowledge
 				</p>
-				<Button text='Explore courses!' onClick={() => redirect('/courses')} />
+				<Button text='Explore courses!' onClick={() => navigate('/courses')} />
 			</div>
-			<div className='mainRedirect'>
+			<div>
 				<p>
 					If you are not logged in, please{' '}
 					<Link

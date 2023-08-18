@@ -4,7 +4,7 @@ import { useContext } from 'react';
 const useCourses = () => {
 	const courses = useContext(CourseContext);
 
-	return courses;
+	return [courses.courseList, courses.setCourseList];
 };
 
 export { useCourses };

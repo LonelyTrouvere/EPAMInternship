@@ -4,10 +4,10 @@ import { displayDuration } from 'utils/time/displayDuration';
 import { useAuthors } from 'utils/hooks/useAuthors';
 
 const CourseCard = ({ course }) => {
-	const authors = useAuthors();
+	const [authors, setAuthors] = useAuthors();
 	let { hours, minutes } = displayDuration(course.duration);
 
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	return (
 		<div className='p-4 pt-6 my-6 flex gap-6 border-2 border-green-500'>
@@ -18,10 +18,10 @@ const CourseCard = ({ course }) => {
 			<div className='leading-9 w-1/4'>
 				<p>
 					<b>Authors:</b>{' '}
-					{authors.list
+					{authors
 						.filter((item) => course.authors.includes(item.id))
 						.map((item, index) => {
-							if (index === authors.list.length - 1)
+							if (index === authors.length - 1)
 								return <span key={item.id}>{item.name}</span>;
 							else return <span key={item.id}>{item.name}, </span>;
 						})}{' '}
@@ -37,7 +37,7 @@ const CourseCard = ({ course }) => {
 						text='Show course'
 						className='mt-3'
 						onClick={() => {
-							redirect(`/courses/${course.id}`);
+							navigate(`/courses/${course.id}`);
 						}}
 					/>
 				</div>

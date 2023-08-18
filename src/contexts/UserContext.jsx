@@ -3,13 +3,13 @@ import { useState, createContext } from 'react';
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-	const [logedUser, setLogedUser] = useState({
+	const [user, setUser] = useState({
 		token: localStorage.getItem('token'),
 		name: localStorage.getItem('name'),
 	});
 
 	return (
-		<UserContext.Provider value={{ info: logedUser, set: setLogedUser }}>
+		<UserContext.Provider value={{ user: user, setUser: setUser }}>
 			{children}
 		</UserContext.Provider>
 	);

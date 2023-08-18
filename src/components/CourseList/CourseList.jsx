@@ -5,20 +5,20 @@ import { useNavigate } from 'react-router';
 import { useCourses } from 'utils/hooks/useCourses';
 
 const CourseList = () => {
-	const courses = useCourses();
+	const [courses, setCourses] = useCourses();
 
 	const [searchCourses, setSearchCourses] = useState([]);
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	return (
 		<div className='course-page text-lg'>
 			<SearchBar
 				set={setSearchCourses}
-				onClick={() => redirect('/courses/add')}
+				onClick={() => navigate('/courses/add')}
 			/>
 			<div className='courses'>
 				{!searchCourses.length
-					? courses.list.map((item) => {
+					? courses.map((item) => {
 							return <CourseCard key={item.id} course={item} />;
 					  })
 					: searchCourses.map((item) => {

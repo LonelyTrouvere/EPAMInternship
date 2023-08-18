@@ -8,9 +8,9 @@ const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
-	const logedUser = useUser();
+	const [user, setUser] = useUser();
 
 	const handleChange = (newState, setState) => {
 		setState(newState);
@@ -35,7 +35,7 @@ const Login = () => {
 				if (data.successful) {
 					localStorage.setItem('token', data.result.replace('Bearer ', ''));
 					localStorage.setItem('name', data.user.name);
-					logedUser.set({
+					setUser({
 						name: data.user.name,
 						token: data.result.replace('Bearer ', ''),
 					});
@@ -44,7 +44,7 @@ const Login = () => {
 				}
 			})
 			.then(() => {
-				redirect('/');
+				navigate('/');
 			})
 			.catch((err) => console.log(err));
 	};

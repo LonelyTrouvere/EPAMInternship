@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Button } from '../../../components/common/Button/Button';
+import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	const handleChange = (newState, setState) => {
 		setState(newState);
@@ -33,7 +33,7 @@ const Register = () => {
 				if (!data.successful) {
 					throw new Error(data.errors[0]);
 				} else {
-					redirect('/login');
+					navigate('/login');
 				}
 			})
 			.catch((err) => console.log(err.toString()));

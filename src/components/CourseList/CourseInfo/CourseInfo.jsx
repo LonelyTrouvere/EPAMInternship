@@ -1,17 +1,16 @@
 import { useNavigate, useParams } from 'react-router';
 import { Button } from 'components/common/Button/Button';
 import { displayDuration } from 'utils/time/displayDuration';
-import { useCourses } from 'utils/hooks/useCourses';
-import { useAuthors } from 'utils/hooks/useAuthors';
+import { useCourseByID } from 'utils/hooks/useCourseByID';
+import { useAuthorsByID } from 'utils/hooks/useAuthorByID';
 
 const CourseInfo = () => {
 	const { id } = useParams();
-	const course = useCourses().list.find((item) => item.id === id);
-	const courseAuthors = useAuthors().list.filter((item) =>
-		course.authors.includes(item.id)
-	);
+	const course = useCourseByID(id);
+	const courseAuthors = useAuthorsByID(course.authors);
+	console.log(courseAuthors);
 
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	let { hours, minutes } = displayDuration(course.duration);
 
@@ -20,7 +19,7 @@ const CourseInfo = () => {
 			<Button
 				text=' < Back to courses'
 				onClick={() => {
-					redirect('/courses');
+					navigate('/courses');
 				}}
 			/>
 			<div className='text-xl'>
@@ -39,7 +38,7 @@ const CourseInfo = () => {
 						</div>
 						<div className='leading-8'>
 							<span className='block mb-2'>
-								<b>Authosr:</b>{' '}
+								<b>Authors:</b>{' '}
 							</span>
 							{courseAuthors.map((item) => (
 								<div>{item.name}</div>

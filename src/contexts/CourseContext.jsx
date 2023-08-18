@@ -8,7 +8,9 @@ const CourseContextProvider = ({ children }) => {
 	const [courseList, setCourseList] = useState(MOCKED_COURSE_LIST);
 
 	return (
-		<CourseContext.Provider value={{ list: courseList, set: setCourseList }}>
+		<CourseContext.Provider
+			value={{ courseList: courseList, setCourseList: setCourseList }}
+		>
 			{children}
 		</CourseContext.Provider>
 	);

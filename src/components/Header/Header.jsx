@@ -4,24 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from 'utils/hooks/useUser';
 
 const Header = () => {
-	const user = useUser();
-	const redirect = useNavigate();
+	const [user, setUser] = useUser();
+	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		fetch(`${process.env.REACT_APP_BASE_URL}/logout`, {
-			method: 'DELETE',
-			headers: {
-				authorization: `Bearer ${user.info.token}`,
-			},
-		});
-
 		localStorage.removeItem('token');
 		localStorage.removeItem('name');
-		user.set({
-			token: localStorage.getItem('token'),
+		setUser({
+			token: '',
 			name: '',
 		});
-		redirect('/login');
+		navigate('/login');
 	};
 
 	return (
@@ -32,7 +25,7 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className='absolute right-0 mr-5'>
-				{!user.info.token && (
+				{!user.token && (
 					<>
 						<Link to='/login'>
 							<Button text='Log in' />
@@ -42,9 +35,9 @@ const Header = () => {
 						</Link>
 					</>
 				)}
-				{user.info.name && (
+				{user.name && (
 					<>
-						<span className='text-2xl mr-4'>{user.info.name}</span>
+						<span className='text-2xl mr-4'>{user.name}</span>
 						<Button text='Log out' onClick={handleLogout}></Button>
 					</>
 				)}

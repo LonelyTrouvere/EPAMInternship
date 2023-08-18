@@ -9,10 +9,10 @@ import { useAuthors } from 'utils/hooks/useAuthors';
 import { useCourses } from 'utils/hooks/useCourses';
 
 const CourseForm = () => {
-	const authors = useAuthors();
-	const courses = useCourses();
+	const [authors, setAuthors] = useAuthors();
+	const [courses, setCourses] = useCourses();
 
-	const redirect = useNavigate();
+	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
@@ -46,7 +46,7 @@ const CourseForm = () => {
 			id: v4(),
 			name: newAuthorName,
 		};
-		authors.set([...authors.list, newAuthor]);
+		setAuthors([...authors, newAuthor]);
 	};
 
 	const addCourseAuthor = (author) => {
@@ -93,8 +93,8 @@ const CourseForm = () => {
 			setNewAuthor('');
 			setCourseAuthors([]);
 
-			courses.set([...courses.list, newCourse]);
-			redirect('/courses');
+			setCourses([...courses, newCourse]);
+			navigate('/courses');
 		}
 	};
 
@@ -138,7 +138,7 @@ const CourseForm = () => {
 				</div>
 				<div className='flex flex-col'>
 					<h3 className='font-bold text-2xl text-center mb-4'>Authors</h3>
-					{authors.list
+					{authors
 						.filter((item) => !courseAuthors.includes(item))
 						.map((item) => {
 							return (
