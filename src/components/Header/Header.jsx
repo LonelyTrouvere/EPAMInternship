@@ -1,4 +1,4 @@
-import { Logo } from './Logo/Logo';
+import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from 'utils/hooks/useUser';
@@ -14,7 +14,6 @@ const Header = () => {
 			token: '',
 			name: '',
 		});
-		navigate('/login');
 	};
 
 	return (
@@ -25,7 +24,12 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className='absolute right-0 mr-5'>
-				{!user.token && (
+				{user.token ? (
+					<>
+						<span className='text-2xl mr-4'>{user.name}</span>
+						<Button text='Log out' onClick={handleLogout}></Button>
+					</>
+				) : (
 					<>
 						<Link to='/login'>
 							<Button text='Log in' />
@@ -33,12 +37,6 @@ const Header = () => {
 						<Link to='/registration'>
 							<Button text='Sign up' />
 						</Link>
-					</>
-				)}
-				{user.name && (
-					<>
-						<span className='text-2xl mr-4'>{user.name}</span>
-						<Button text='Log out' onClick={handleLogout}></Button>
 					</>
 				)}
 			</div>

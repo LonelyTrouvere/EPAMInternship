@@ -17,36 +17,35 @@ const Login = () => {
 	};
 
 	const handleLogin = async (e) => {
-		e.preventDefault();
-		const user = {
-			password,
-			email,
-		};
+		try {
+			e.preventDefault();
+			const user = {
+				password,
+				email,
+			};
 
-		fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'content-type': 'application/json',
-			},
-		})
-			.then((data) => data.json())
-			.then((data) => {
-				if (data.successful) {
-					localStorage.setItem('token', data.result.replace('Bearer ', ''));
-					localStorage.setItem('name', data.user.name);
-					setUser({
-						name: data.user.name,
-						token: data.result.replace('Bearer ', ''),
-					});
-				} else {
-					throw new Error('Something went wrong');
-				}
-			})
-			.then(() => {
-				navigate('/');
-			})
-			.catch((err) => console.log(err));
+			const response = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
+				method: 'POST',
+				body: JSON.stringify(user),
+				headers: {
+					'content-type': 'application/json',
+				},
+			});
+			const data = await response.json();
+
+			console.log(data.errors);
+			if (!response.ok) throw new Error(data.errors[0] || data.result);
+
+			localStorage.setItem('token', data.result.replace('Bearer ', ''));
+			localStorage.setItem('name', data.user.name);
+			setUser({
+				name: data.user.name,
+				token: data.result.replace('Bearer ', ''),
+			});
+			navigate('/');
+		} catch (err) {
+			alert(err.message);
+		}
 	};
 
 	return (

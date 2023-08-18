@@ -8,6 +8,9 @@ const UserContextProvider = ({ children }) => {
 		name: localStorage.getItem('name'),
 	});
 
+	console.log(user.token);
+	console.log(localStorage.getItem('token'));
+
 	return (
 		<UserContext.Provider value={{ user: user, setUser: setUser }}>
 			{children}

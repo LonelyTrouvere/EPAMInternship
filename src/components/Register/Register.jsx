@@ -15,28 +15,33 @@ const Register = () => {
 	};
 
 	const handleRegister = async (e) => {
-		e.preventDefault();
-		const user = {
-			name,
-			password,
-			email,
-		};
-		fetch(`${process.env.REACT_APP_BASE_URL}/register`, {
-			method: 'POST',
-			body: JSON.stringify(user),
-			headers: {
-				'content-type': 'application/json',
-			},
-		})
-			.then((data) => data.json())
-			.then((data) => {
-				if (!data.successful) {
-					throw new Error(data.errors[0]);
-				} else {
-					navigate('/login');
+		try {
+			e.preventDefault();
+
+			const user = {
+				name,
+				password,
+				email,
+			};
+
+			const response = await fetch(
+				`${process.env.REACT_APP_BASE_URL}/register`,
+				{
+					method: 'POST',
+					body: JSON.stringify(user),
+					headers: {
+						'content-type': 'application/json',
+					},
 				}
-			})
-			.catch((err) => console.log(err.toString()));
+			);
+
+			const data = await response.json();
+			if (!response.ok) throw new Error(data.errors[0]);
+
+			navigate('/login');
+		} catch (err) {
+			alert(err.message);
+		}
 	};
 
 	return (

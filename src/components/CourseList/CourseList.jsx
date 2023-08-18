@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CourseCard } from './CourseCard/CourseCard';
-import { SearchBar } from './SearchBar/SearchBar';
+import { CourseCard } from '../CourseCard/CourseCard';
+import { SearchBar } from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router';
 import { useCourses } from 'utils/hooks/useCourses';
 
