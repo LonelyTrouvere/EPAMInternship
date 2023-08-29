@@ -3,6 +3,7 @@ import { Button } from 'components/common/Button/Button';
 import { displayDuration } from 'utils/time/displayDuration';
 import { useCourseByID } from 'utils/hooks/useCourseByID';
 import { useAuthorsByID } from 'utils/hooks/useAuthorByID';
+import { COURSES_ROUTE } from 'utils/routes/routes';
 
 const CourseInfo = () => {
 	const { id } = useParams();
@@ -19,7 +20,7 @@ const CourseInfo = () => {
 			<Button
 				text=' < Back to courses'
 				onClick={() => {
-					navigate('/courses');
+					navigate(COURSES_ROUTE);
 				}}
 			/>
 			<div className='text-xl'>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
+import { LOGIN_ROUTE } from 'utils/routes/routes';
 
 const Register = () => {
 	const [name, setName] = useState('');
@@ -38,7 +39,7 @@ const Register = () => {
 			const data = await response.json();
 			if (!response.ok) throw new Error(data.errors[0]);
 
-			navigate('/login');
+			navigate(LOGIN_ROUTE);
 		} catch (err) {
 			alert(err.message);
 		}
@@ -81,7 +82,7 @@ const Register = () => {
 			<p className='text-base text-center'>
 				If you have an account you can{' '}
 				<Link
-					to='/login'
+					to={LOGIN_ROUTE}
 					className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
 				>
 					Log in

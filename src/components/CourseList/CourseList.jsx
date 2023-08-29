@@ -3,6 +3,7 @@ import { CourseCard } from '../CourseCard/CourseCard';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router';
 import { useCourses } from 'utils/hooks/useCourses';
+import { COURSES_FORM_ROUTE } from 'utils/routes/routes';
 
 const CourseList = () => {
 	const [courses, setCourses] = useCourses();
@@ -14,7 +15,7 @@ const CourseList = () => {
 		<div className='course-page text-lg'>
 			<SearchBar
 				set={setSearchCourses}
-				onClick={() => navigate('/courses/add')}
+				onClick={() => navigate(COURSES_FORM_ROUTE)}
 			/>
 			<div className='courses'>
 				{!searchCourses.length

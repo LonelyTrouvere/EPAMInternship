@@ -1,11 +1,11 @@
 import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useUser } from 'utils/hooks/useUser';
+import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
 
 const Header = () => {
 	const [user, setUser] = useUser();
-	const navigate = useNavigate();
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
@@ -19,7 +19,7 @@ const Header = () => {
 	return (
 		<div className='relative flex items-center border-2 border-orange-400 py-2'>
 			<div className='h-20'>
-				<Link to='/'>
+				<Link to={HOME_ROUTE}>
 					<Logo />
 				</Link>
 			</div>
@@ -31,10 +31,10 @@ const Header = () => {
 					</>
 				) : (
 					<>
-						<Link to='/login'>
+						<Link to={LOGIN_ROUTE}>
 							<Button text='Log in' />
 						</Link>
-						<Link to='/registration'>
+						<Link to={REGISTER_ROUTE}>
 							<Button text='Sign up' />
 						</Link>
 					</>

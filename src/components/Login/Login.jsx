@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Input } from 'components/common/Input/Input';
 import { Button } from 'components/common/Button/Button';
 import { useUser } from 'utils/hooks/useUser';
+import { COURSES_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -42,7 +43,7 @@ const Login = () => {
 				name: data.user.name,
 				token: data.result.replace('Bearer ', ''),
 			});
-			navigate('/');
+			navigate(COURSES_ROUTE);
 		} catch (err) {
 			alert(err.message);
 		}
@@ -78,7 +79,7 @@ const Login = () => {
 					If you don&apos;t an account you can{' '}
 					<Link
 						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
-						to='/registration'
+						to={REGISTER_ROUTE}
 					>
 						Sign up
 					</Link>

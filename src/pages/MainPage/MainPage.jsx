@@ -1,6 +1,11 @@
 import { Button } from 'components/common/Button/Button';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import {
+	COURSES_ROUTE,
+	LOGIN_ROUTE,
+	REGISTER_ROUTE,
+} from 'utils/routes/routes';
 
 const MainPage = () => {
 	const navigate = useNavigate();
@@ -15,21 +20,24 @@ const MainPage = () => {
 					<br />
 					If you are ready, click button below to explore the world of knowledge
 				</p>
-				<Button text='Explore courses!' onClick={() => navigate('/courses')} />
+				<Button
+					text='Explore courses!'
+					onClick={() => navigate(COURSES_ROUTE)}
+				/>
 			</div>
 			<div>
 				<p>
 					If you are not logged in, please{' '}
 					<Link
 						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
-						to='/login'
+						to={LOGIN_ROUTE}
 					>
 						Log in
 					</Link>{' '}
 					or{' '}
 					<Link
 						className='font-medium text-blue-500 hover:underline hover:text-red-500 visited:text-blue-800'
-						to='/registration'
+						to={REGISTER_ROUTE}
 					>
 						Sign up
 					</Link>

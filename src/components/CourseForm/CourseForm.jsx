@@ -7,6 +7,7 @@ import { displayDuration } from 'utils/time/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
 import { useAuthors } from 'utils/hooks/useAuthors';
 import { useCourses } from 'utils/hooks/useCourses';
+import { COURSES_ROUTE } from 'utils/routes/routes';
 
 const CourseForm = () => {
 	const [authors, setAuthors] = useAuthors();
@@ -94,7 +95,7 @@ const CourseForm = () => {
 			setCourseAuthors([]);
 
 			setCourses([...courses, newCourse]);
-			navigate('/courses');
+			navigate(COURSES_ROUTE);
 		}
 	};
 
