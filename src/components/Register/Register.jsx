@@ -11,11 +11,19 @@ const Register = () => {
 
 	const navigate = useNavigate();
 
-	const handleChange = (newState, setState) => {
-		setState(newState);
+	const handleName = (e) => {
+		setName(e.target.value);
 	};
 
-	const handleRegister = async (e) => {
+	const handleEmail = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handlePassword = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const onRegister = async (e) => {
 		try {
 			e.preventDefault();
 
@@ -48,7 +56,7 @@ const Register = () => {
 	return (
 		<form
 			className='relative w-fit top-[4rem] left-[27%] text-xl'
-			onSubmit={handleRegister}
+			onSubmit={onRegister}
 		>
 			<h1 className='text-3xl font-bold text-center mb-8'>Registration</h1>
 			<Input
@@ -56,27 +64,21 @@ const Register = () => {
 				type='text'
 				placeholder='Enter name'
 				className='w-[40rem] mb-6'
-				onChange={(e) => {
-					handleChange(e.target.value, setName);
-				}}
+				onChange={handleName}
 			/>
 			<Input
 				labelText='Email'
 				type='text'
 				placeholder='Enter email'
 				className='w-[40rem] mb-6'
-				onChange={(e) => {
-					handleChange(e.target.value, setEmail);
-				}}
+				onChange={handleEmail}
 			/>
 			<Input
 				labelText='Password'
 				type='password'
 				placeholder='Enter password'
 				className='w-[40rem] mb-6'
-				onChange={(e) => {
-					handleChange(e.target.value, setPassword);
-				}}
+				onChange={handlePassword}
 			/>
 			<Button text='Registration' className='block mb-3 m-auto' type='submit' />
 			<p className='text-base text-center'>

@@ -13,11 +13,15 @@ const Login = () => {
 
 	const [user, setUser] = useUser();
 
-	const handleChange = (newState, setState) => {
-		setState(newState);
+	const handleEmail = (e) => {
+		setEmail(e.target.value);
 	};
 
-	const handleLogin = async (e) => {
+	const handlePassword = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const onLogin = async (e) => {
 		try {
 			e.preventDefault();
 			const user = {
@@ -53,7 +57,7 @@ const Login = () => {
 		<>
 			<form
 				className='relative w-fit top-[5rem] left-[27%] text-xl'
-				onSubmit={handleLogin}
+				onSubmit={onLogin}
 			>
 				<h1 className='text-3xl font-bold text-center mb-8'>Log in</h1>
 				<Input
@@ -61,18 +65,14 @@ const Login = () => {
 					type='text'
 					placeholder='Enter email'
 					className='w-[40rem] mb-6'
-					onChange={(e) => {
-						handleChange(e.target.value, setEmail);
-					}}
+					onChange={handleEmail}
 				/>
 				<Input
 					labelText='Password'
 					type='password'
 					placeholder='Enter password'
 					className='w-[40rem] mb-6'
-					onChange={(e) => {
-						handleChange(e.target.value, setPassword);
-					}}
+					onChange={handlePassword}
 				/>
 				<Button text='Log in' className='block mb-3 m-auto' type='submit' />
 				<p className='text-base text-center'>

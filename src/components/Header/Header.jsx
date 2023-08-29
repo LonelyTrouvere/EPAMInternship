@@ -1,11 +1,12 @@
 import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from 'utils/hooks/useUser';
 import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
 
 const Header = () => {
 	const [user, setUser] = useUser();
+	const navigate = useNavigate();
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
@@ -14,6 +15,7 @@ const Header = () => {
 			token: '',
 			name: '',
 		});
+		navigate(LOGIN_ROUTE);
 	};
 
 	return (
