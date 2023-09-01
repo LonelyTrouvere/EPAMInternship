@@ -2,16 +2,17 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Input } from 'components/common/Input/Input';
 import { Button } from 'components/common/Button/Button';
-import { useUser } from 'utils/hooks/useUser';
 import { COURSES_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
+import { useDispatch } from 'react-redux';
+import { loginAction } from 'store/user/actionCreators';
+import { loginUser } from 'servisec';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const navigate = useNavigate();
-
-	const [user, setUser] = useUser();
+	const dispatch = useDispatch();
 
 	const handleEmail = (e) => {
 		setEmail(e.target.value);
@@ -29,24 +30,17 @@ const Login = () => {
 				email,
 			};
 
-			const response = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
-				method: 'POST',
-				body: JSON.stringify(user),
-				headers: {
-					'content-type': 'application/json',
-				},
-			});
-			const data = await response.json();
+			const data = await loginUser(user);
 
-			console.log(data.errors);
-			if (!response.ok) throw new Error(data.errors[0] || data.result);
+			const resultUser = {
+				...data.user,
+				isAuth: true,
+				token: data.result,
+			};
 
-			localStorage.setItem('token', data.result.replace('Bearer ', ''));
-			localStorage.setItem('name', data.user.name);
-			setUser({
-				name: data.user.name,
-				token: data.result.replace('Bearer ', ''),
-			});
+			localStorage.setItem('token', resultUser.token);
+			dispatch(loginAction(resultUser));
+
 			navigate(COURSES_ROUTE);
 		} catch (err) {
 			alert(err.message);

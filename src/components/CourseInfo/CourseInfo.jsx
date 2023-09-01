@@ -1,15 +1,14 @@
 import { useNavigate, useParams } from 'react-router';
 import { Button } from 'components/common/Button/Button';
 import { displayDuration } from 'utils/time/displayDuration';
-import { useCourseByID } from 'utils/hooks/useCourseByID';
-import { useAuthorsByID } from 'utils/hooks/useAuthorByID';
 import { COURSES_ROUTE } from 'utils/routes/routes';
+import { useCourseByID } from 'hooks/useCourseByID';
+import { useAuthorsByID } from 'hooks/useAuthorsByID';
 
 const CourseInfo = () => {
 	const { id } = useParams();
 	const course = useCourseByID(id);
 	const courseAuthors = useAuthorsByID(course.authors);
-	console.log(courseAuthors);
 
 	const navigate = useNavigate();
 

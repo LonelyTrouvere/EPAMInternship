@@ -5,14 +5,16 @@ import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
 import { displayDuration } from 'utils/time/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
-import { useAuthors } from 'utils/hooks/useAuthors';
-import { useCourses } from 'utils/hooks/useCourses';
 import { COURSES_ROUTE } from 'utils/routes/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAuthorAction } from 'store/authors/actionCreators';
+import { addCourseAction } from 'store/courses/actionCreators';
 
 const CourseForm = () => {
-	const [authors, setAuthors] = useAuthors();
-	const [courses, setCourses] = useCourses();
+	const authors = useSelector((state) => state.authors.authors);
+	const courses = useSelector((state) => state.courses.courses);
 
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
@@ -47,7 +49,7 @@ const CourseForm = () => {
 			id: v4(),
 			name: newAuthorName,
 		};
-		setAuthors([...authors, newAuthor]);
+		dispatch(addAuthorAction(newAuthor));
 	};
 
 	const addCourseAuthor = (author) => {
@@ -94,7 +96,7 @@ const CourseForm = () => {
 			setNewAuthor('');
 			setCourseAuthors([]);
 
-			setCourses([...courses, newCourse]);
+			dispatch(addCourseAction(newCourse));
 			navigate(COURSES_ROUTE);
 		}
 	};

@@ -1,11 +1,11 @@
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
 import { useState } from 'react';
-import { useCourses } from 'utils/hooks/useCourses';
+import { useSelector } from 'react-redux';
 
 const SearchBar = (props) => {
 	const [search, setSearch] = useState('');
-	const [courses, setCourses] = useCourses();
+	const courses = useSelector((state) => state.courses.courses);
 
 	const handleChange = (e) => {
 		if (e.target.value === '') props.set([]);

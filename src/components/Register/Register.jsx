@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
 import { LOGIN_ROUTE } from 'utils/routes/routes';
+import { registerUser } from 'servisec';
 
 const Register = () => {
 	const [name, setName] = useState('');
@@ -33,19 +34,7 @@ const Register = () => {
 				email,
 			};
 
-			const response = await fetch(
-				`${process.env.REACT_APP_BASE_URL}/register`,
-				{
-					method: 'POST',
-					body: JSON.stringify(user),
-					headers: {
-						'content-type': 'application/json',
-					},
-				}
-			);
-
-			const data = await response.json();
-			if (!response.ok) throw new Error(data.errors[0]);
+			await registerUser(user);
 
 			navigate(LOGIN_ROUTE);
 		} catch (err) {

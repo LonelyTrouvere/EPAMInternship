@@ -7,7 +7,7 @@ import { CourseList } from './components/CourseList/CourseList';
 import { CourseForm } from './components/CourseForm/CourseForm';
 import { ProtectedRoute } from './components/common/ProtectedRoute/ProtectedRoute';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
-import { useUser } from 'utils/hooks/useUser';
+import { useSelector } from 'react-redux';
 import {
 	COURSES_FORM_ROUTE,
 	COURSES_ROUTE,
@@ -18,18 +18,18 @@ import {
 } from 'utils/routes/routes';
 
 const App = () => {
-	const [user, setUser] = useUser();
+	const isAuth = useSelector((state) => state.user.isAuth);
 	return (
 		<>
 			<Header />
 			<div className='border-2 border-blue-500 h-fit min-h-[86vh] p-5'>
 				<Routes>
 					<Route path={HOME_ROUTE} element={<MainPage />} />
-					<Route element={<ProtectedRoute token={!user.token} />}>
+					<Route element={<ProtectedRoute token={!isAuth} />}>
 						<Route path={REGISTER_ROUTE} element={<Register />} />
 						<Route path={LOGIN_ROUTE} element={<Login />} />
 					</Route>
-					<Route element={<ProtectedRoute token={user.token} />}>
+					<Route element={<ProtectedRoute token={isAuth} />}>
 						<Route path={COURSES_ROUTE} element={<CourseList />} />
 						<Route path={COURSES_FORM_ROUTE} element={<CourseForm />} />
 						<Route path={COURSE_ID_ROUTE} element={<CourseInfo />} />

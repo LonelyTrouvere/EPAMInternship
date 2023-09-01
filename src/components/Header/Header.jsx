@@ -1,20 +1,18 @@
 import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from 'utils/hooks/useUser';
+import { useDispatch, useSelector } from 'react-redux';
 import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
+import { logoutAction } from 'store/user/actionCreators';
 
 const Header = () => {
-	const [user, setUser] = useUser();
+	const user = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
-		localStorage.removeItem('name');
-		setUser({
-			token: '',
-			name: '',
-		});
+		dispatch(logoutAction());
 		navigate(LOGIN_ROUTE);
 	};
 
@@ -26,7 +24,7 @@ const Header = () => {
 				</Link>
 			</div>
 			<div className='absolute right-0 mr-5'>
-				{user.token ? (
+				{user.isAuth ? (
 					<>
 						<span className='text-2xl mr-4'>{user.name}</span>
 						<Button text='Log out' onClick={handleLogout}></Button>

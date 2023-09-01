@@ -1,10 +1,10 @@
 import { Button } from 'components/common/Button/Button';
 import { useNavigate } from 'react-router';
 import { displayDuration } from 'utils/time/displayDuration';
-import { useAuthors } from 'utils/hooks/useAuthors';
+import { useSelector } from 'react-redux';
 
 const CourseCard = ({ course }) => {
-	const [authors, setAuthors] = useAuthors();
+	const authors = useSelector((state) => state.authors.authors);
 	let { hours, minutes } = displayDuration(course.duration);
 
 	const navigate = useNavigate();

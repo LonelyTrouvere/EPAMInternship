@@ -1,17 +1,12 @@
 import { App } from 'App';
-import { AuthorContextProvider } from 'contexts/AuthorContext';
-import { CourseContextProvider } from 'contexts/CourseContext';
-import { UserContextProvider } from 'contexts/UserContext';
+import { Provider } from 'react-redux';
+import { store } from 'store/index';
 
 const Root = () => {
 	return (
-		<UserContextProvider>
-			<CourseContextProvider>
-				<AuthorContextProvider>
-					<App />
-				</AuthorContextProvider>
-			</CourseContextProvider>
-		</UserContextProvider>
+		<Provider store={store}>
+			<App />
+		</Provider>
 	);
 };
 
