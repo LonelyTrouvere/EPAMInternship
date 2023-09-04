@@ -12,7 +12,7 @@ const CourseInfo = () => {
 
 	const navigate = useNavigate();
 
-	let { hours, minutes } = displayDuration(course.duration);
+	const { hours, minutes } = displayDuration(course.duration);
 
 	return (
 		<>

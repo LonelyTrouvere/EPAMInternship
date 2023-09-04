@@ -11,20 +11,18 @@ const CourseList = () => {
 	const [searchCourses, setSearchCourses] = useState([]);
 	const navigate = useNavigate();
 
+	const cards = searchCourses.length ? searchCourses : courses;
+
 	return (
 		<div className='course-page text-lg'>
 			<SearchBar
-				set={setSearchCourses}
+				setSearchCourses={setSearchCourses}
 				onClick={() => navigate(ADD_COURSE_ROUTE)}
 			/>
 			<div className='courses'>
-				{!searchCourses.length
-					? courses.map((item) => {
-							return <CourseCard key={item.id} course={item} />;
-					  })
-					: searchCourses.map((item) => {
-							return <CourseCard key={item.id} course={item} />;
-					  })}
+				{cards.map((item) => {
+					return <CourseCard key={item.id} course={item} />;
+				})}
 			</div>
 		</div>
 	);

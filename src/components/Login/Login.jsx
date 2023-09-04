@@ -50,7 +50,7 @@ const Login = () => {
 	return (
 		<>
 			<form
-				className='relative w-fit top-[5rem] left-[27%] text-xl'
+				className='relative w-fit top-[5rem] m-auto text-xl'
 				onSubmit={onLogin}
 			>
 				<h1 className='text-3xl font-bold text-center mb-8'>Log in</h1>

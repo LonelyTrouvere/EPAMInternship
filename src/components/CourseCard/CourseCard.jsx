@@ -7,7 +7,7 @@ import { SmallButton } from 'components/common/SmallButton/SmallButton';
 
 const CourseCard = ({ course }) => {
 	const authors = useSelector((state) => state.authors.authors);
-	let { hours, minutes } = displayDuration(course.duration);
+	const { hours, minutes } = displayDuration(course.duration);
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();

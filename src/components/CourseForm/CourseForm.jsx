@@ -21,7 +21,7 @@ const CourseForm = () => {
 	const [newAuthorName, setNewAuthor] = useState('');
 	const [duration, setDuration] = useState(0);
 	const [courseAuthors, setCourseAuthors] = useState([]);
-	let { hours, minutes } = displayDuration(duration);
+	const { hours, minutes } = displayDuration(duration);
 
 	const handleTitel = (e) => {
 		setTitle(e.target.value);
@@ -37,10 +37,6 @@ const CourseForm = () => {
 
 	const handleDuration = (e) => {
 		setDuration(e.target.value);
-		hours = Math.floor(duration / 60);
-		minutes = duration - hours * 60;
-		if (hours < 10) hours = '0' + hours;
-		if (minutes < 10) minutes = '0' + minutes;
 	};
 
 	const addNewAuthor = () => {

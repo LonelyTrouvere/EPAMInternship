@@ -31,12 +31,8 @@ const Header = () => {
 					</>
 				) : (
 					<>
-						<Link to={LOGIN_ROUTE}>
-							<Button>Log in</Button>
-						</Link>
-						<Link to={REGISTER_ROUTE}>
-							<Button>Sign in</Button>
-						</Link>
+						<Button onClick={() => navigate(LOGIN_ROUTE)}>Log in</Button>
+						<Button onClick={() => navigate(REGISTER_ROUTE)}>Sign in</Button>
 					</>
 				)}
 			</div>

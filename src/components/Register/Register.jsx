@@ -44,7 +44,7 @@ const Register = () => {
 
 	return (
 		<form
-			className='relative w-fit top-[4rem] left-[27%] text-xl'
+			className='relative w-fit top-[4rem] m-auto text-xl'
 			onSubmit={onRegister}
 		>
 			<h1 className='text-3xl font-bold text-center mb-8'>Registration</h1>

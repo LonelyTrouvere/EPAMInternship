@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const SearchBar = (props) => {
+	const { setSearchCourses } = props;
 	const [search, setSearch] = useState('');
 	const courses = useSelector((state) => state.courses.courses);
 
 	const handleChange = (e) => {
-		if (e.target.value === '') props.set([]);
+		if (e.target.value === '') setSearchCourses([]);
 		setSearch(e.target.value);
 	};
 
 	const handleSerach = () => {
-		props.set(
+		setSearchCourses(
 			courses.filter(
 				(item) =>
 					item.id === search ||
