@@ -2,7 +2,7 @@ import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
+import { HOME_PAGE_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { logoutAction } from 'store/user/actionCreators';
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
 	return (
 		<div className='relative flex items-center border-2 border-orange-400 py-2'>
 			<div className='h-20'>
-				<Link to={HOME_ROUTE}>
+				<Link to={HOME_PAGE_ROUTE}>
 					<Logo />
 				</Link>
 			</div>
@@ -27,15 +27,15 @@ const Header = () => {
 				{user.isAuth ? (
 					<>
 						<span className='text-2xl mr-4'>{user.name}</span>
-						<Button text='Log out' onClick={handleLogout}></Button>
+						<Button onClick={handleLogout}>Log out</Button>
 					</>
 				) : (
 					<>
 						<Link to={LOGIN_ROUTE}>
-							<Button text='Log in' />
+							<Button>Log in</Button>
 						</Link>
 						<Link to={REGISTER_ROUTE}>
-							<Button text='Sign up' />
+							<Button>Sign in</Button>
 						</Link>
 					</>
 				)}

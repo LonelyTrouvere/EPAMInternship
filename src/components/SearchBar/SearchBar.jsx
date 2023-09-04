@@ -31,11 +31,11 @@ const SearchBar = (props) => {
 					className='w-96 mr-5 inline'
 				/>
 				<div className='inline-block'>
-					<Button text='Search' onClick={handleSerach} />
+					<Button onClick={handleSerach}>Search</Button>
 				</div>
 			</div>
 			<div className='inline-block absolute right-0'>
-				<Button text='Add new course' onClick={props.onClick} />
+				<Button onClick={props.onClick}>Add new course</Button>
 			</div>
 		</div>
 	);

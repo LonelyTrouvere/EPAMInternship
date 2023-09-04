@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router';
 import { Button } from 'components/common/Button/Button';
-import { displayDuration } from 'utils/time/displayDuration';
+import { displayDuration } from 'utils/displayDuration';
 import { COURSES_ROUTE } from 'constants/routes';
 import { useCourseByID } from 'hooks/useCourseByID';
 import { useAuthorsByID } from 'hooks/useAuthorsByID';
@@ -17,11 +17,13 @@ const CourseInfo = () => {
 	return (
 		<>
 			<Button
-				text=' < Back to courses'
 				onClick={() => {
 					navigate(COURSES_ROUTE);
 				}}
-			/>
+			>
+				{' '}
+				Back to courses
+			</Button>
 			<div className='text-xl'>
 				<h1 className='text-center text-5xl font-bold mb-16'>{course.title}</h1>
 				<div className='flex gap-10'>

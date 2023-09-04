@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CourseCard } from '../CourseCard/CourseCard';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { useNavigate } from 'react-router';
-import { COURSES_FORM_ROUTE } from 'constants/routes';
+import { ADD_COURSE_ROUTE } from 'constants/routes';
 import { useSelector } from 'react-redux';
 
 const CourseList = () => {
@@ -15,7 +15,7 @@ const CourseList = () => {
 		<div className='course-page text-lg'>
 			<SearchBar
 				set={setSearchCourses}
-				onClick={() => navigate(COURSES_FORM_ROUTE)}
+				onClick={() => navigate(ADD_COURSE_ROUTE)}
 			/>
 			<div className='courses'>
 				{!searchCourses.length

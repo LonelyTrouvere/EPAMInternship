@@ -3,7 +3,7 @@ import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
 import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
-import { displayDuration } from 'utils/time/displayDuration';
+import { displayDuration } from 'utils/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
 import { COURSES_ROUTE } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ import { addCourseAction } from 'store/courses/actionCreators';
 
 const CourseForm = () => {
 	const authors = useSelector((state) => state.authors.authors);
-	const courses = useSelector((state) => state.courses.courses);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -111,11 +110,9 @@ const CourseForm = () => {
 					placeholder='Enter title...'
 					onChange={handleTitel}
 				/>
-				<Button
-					text='Create course'
-					className='absolute right-0'
-					onClick={createCourse}
-				/>
+				<Button className='absolute right-0' onClick={createCourse}>
+					Create course
+				</Button>
 			</div>
 			<Textarea
 				labelText='Description'
@@ -133,11 +130,9 @@ const CourseForm = () => {
 						className='block w-[90%] mb-6'
 						onChange={handleNewAuthor}
 					/>
-					<Button
-						text='Create author'
-						className='ml-[40%]'
-						onClick={addNewAuthor}
-					/>
+					<Button className='ml-[40%]' onClick={addNewAuthor}>
+						Create author
+					</Button>
 				</div>
 				<div className='flex flex-col'>
 					<h3 className='font-bold text-2xl text-center mb-4'>Authors</h3>
@@ -148,10 +143,11 @@ const CourseForm = () => {
 								<div key={item.id} className='my-4 relative'>
 									<p className='inline-block'>{item.name}</p>
 									<Button
-										text='Add author'
 										className='absolute right-0'
 										onClick={() => addCourseAuthor(item)}
-									/>
+									>
+										Add author
+									</Button>
 								</div>
 							);
 						})}
@@ -181,10 +177,11 @@ const CourseForm = () => {
 								<div key={item.id} className='my-4 relative'>
 									<p className='inline-block'>{item.name}</p>
 									<Button
-										text='Delete author'
 										className='absolute right-0'
 										onClick={() => removeAuthor(item)}
-									/>
+									>
+										Delete author
+									</Button>
 								</div>
 							);
 						})

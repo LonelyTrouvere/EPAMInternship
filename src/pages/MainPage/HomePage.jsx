@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { COURSES_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 
-const MainPage = () => {
+const HomePage = () => {
 	const navigate = useNavigate();
 
 	return (
@@ -16,10 +16,9 @@ const MainPage = () => {
 					<br />
 					If you are ready, click button below to explore the world of knowledge
 				</p>
-				<Button
-					text='Explore courses!'
-					onClick={() => navigate(COURSES_ROUTE)}
-				/>
+				<Button onClick={() => navigate(COURSES_ROUTE)}>
+					Explore courses!
+				</Button>
 			</div>
 			<div>
 				<p>
@@ -43,4 +42,4 @@ const MainPage = () => {
 	);
 };
 
-export { MainPage };
+export { HomePage };

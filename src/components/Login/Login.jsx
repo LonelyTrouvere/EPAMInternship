@@ -68,7 +68,9 @@ const Login = () => {
 					className='w-[40rem] mb-6'
 					onChange={handlePassword}
 				/>
-				<Button text='Log in' className='block mb-3 m-auto' type='submit' />
+				<Button className='block mb-3 m-auto' type='submit'>
+					Log in
+				</Button>
 				<p className='text-base text-center'>
 					If you don&apos;t an account you can{' '}
 					<Link

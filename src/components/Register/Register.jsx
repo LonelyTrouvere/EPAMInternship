@@ -69,7 +69,9 @@ const Register = () => {
 				className='w-[40rem] mb-6'
 				onChange={handlePassword}
 			/>
-			<Button text='Registration' className='block mb-3 m-auto' type='submit' />
+			<Button className='block mb-3 m-auto' type='submit'>
+				Registration
+			</Button>
 			<p className='text-base text-center'>
 				If you have an account you can{' '}
 				<Link
