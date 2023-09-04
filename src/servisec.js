@@ -2,8 +2,6 @@ const getCoursesFromAPI = async () => {
 	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/courses/all`);
 	const data = await response.json();
 
-	console.log('api');
-
 	return data.result;
 };
 

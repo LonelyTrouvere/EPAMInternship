@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
 import { displayDuration } from 'utils/time/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
-import { COURSES_ROUTE } from 'utils/routes/routes';
+import { COURSES_ROUTE } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAuthorAction } from 'store/authors/actionCreators';
 import { addCourseAction } from 'store/courses/actionCreators';

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Input } from 'components/common/Input/Input';
 import { Button } from 'components/common/Button/Button';
-import { COURSES_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
+import { COURSES_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { useDispatch } from 'react-redux';
 import { loginAction } from 'store/user/actionCreators';
 import { loginUser } from 'servisec';

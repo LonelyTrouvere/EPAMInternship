@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
-import { LOGIN_ROUTE } from 'utils/routes/routes';
+import { LOGIN_ROUTE } from 'constants/routes';
 import { registerUser } from 'servisec';
 
 const Register = () => {

@@ -1,11 +1,7 @@
 import { Button } from 'components/common/Button/Button';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import {
-	COURSES_ROUTE,
-	LOGIN_ROUTE,
-	REGISTER_ROUTE,
-} from 'utils/routes/routes';
+import { COURSES_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 
 const MainPage = () => {
 	const navigate = useNavigate();

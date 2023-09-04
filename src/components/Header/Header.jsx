@@ -2,7 +2,7 @@ import { Logo } from '../Logo/Logo';
 import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'utils/routes/routes';
+import { HOME_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { logoutAction } from 'store/user/actionCreators';
 
 const Header = () => {

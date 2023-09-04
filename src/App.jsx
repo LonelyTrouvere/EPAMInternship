@@ -15,7 +15,7 @@ import {
 	HOME_ROUTE,
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
-} from 'utils/routes/routes';
+} from 'constants/routes';
 
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
