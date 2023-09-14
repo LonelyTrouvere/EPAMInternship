@@ -106,7 +106,11 @@ const CourseForm = () => {
 					placeholder='Enter title...'
 					onChange={handleTitel}
 				/>
-				<Button className='absolute right-0' onClick={createCourse}>
+				<Button
+					type='submit'
+					className='absolute right-0'
+					onClick={createCourse}
+				>
 					Create course
 				</Button>
 			</div>
@@ -126,7 +130,7 @@ const CourseForm = () => {
 						className='block w-[90%] mb-6'
 						onChange={handleNewAuthor}
 					/>
-					<Button className='ml-[40%]' onClick={addNewAuthor}>
+					<Button type='button' className='ml-[40%]' onClick={addNewAuthor}>
 						Create author
 					</Button>
 				</div>
@@ -139,6 +143,7 @@ const CourseForm = () => {
 								<div key={item.id} className='my-4 relative'>
 									<p className='inline-block'>{item.name}</p>
 									<Button
+										type='button'
 										className='absolute right-0'
 										onClick={() => addCourseAuthor(item)}
 									>
@@ -173,6 +178,7 @@ const CourseForm = () => {
 								<div key={item.id} className='my-4 relative'>
 									<p className='inline-block'>{item.name}</p>
 									<Button
+										type='button'
 										className='absolute right-0'
 										onClick={() => removeAuthor(item)}
 									>
