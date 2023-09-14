@@ -39,6 +39,7 @@ const Login = () => {
 			};
 
 			localStorage.setItem('token', resultUser.token);
+			localStorage.setItem('user', JSON.stringify(data.user));
 			dispatch(loginAction(resultUser));
 
 			navigate(COURSES_ROUTE);

@@ -7,7 +7,7 @@ import { CourseList } from './components/CourseList/CourseList';
 import { CourseForm } from './components/CourseForm/CourseForm';
 import { ProtectedRoute } from './components/common/ProtectedRoute/ProtectedRoute';
 import { CourseInfo } from './components/CourseInfo/CourseInfo';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	ADD_COURSE_ROUTE,
 	COURSES_ROUTE,
@@ -16,9 +16,30 @@ import {
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
 } from 'constants/routes';
+import { useEffect } from 'react';
+import { getAuthorsFromAPI, getCoursesFromAPI } from 'servisec';
+import { getCoursesAction } from 'store/courses/actionCreators';
+import { getAuthorsAction } from 'store/authors/actionCreators';
 
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchCourses = async () => {
+			const courses = await getCoursesFromAPI();
+			dispatch(getCoursesAction(courses));
+		};
+
+		const fetchAuthors = async () => {
+			const authors = await getAuthorsFromAPI();
+			dispatch(getAuthorsAction(authors));
+		};
+
+		fetchCourses();
+		fetchAuthors();
+	}, []);
+
 	return (
 		<>
 			<Header />

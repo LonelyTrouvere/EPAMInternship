@@ -1,8 +1,7 @@
-import { getAuthorsFromAPI } from 'servisec';
 import { GET_AUTHORS, ADD_AUTHOR } from './actionTypes';
 
 const defaultAuthors = {
-	authors: await getAuthorsFromAPI(),
+	authors: [],
 };
 
 const authorsReducer = (state = defaultAuthors, action) => {

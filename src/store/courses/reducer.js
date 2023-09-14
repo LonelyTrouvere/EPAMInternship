@@ -1,8 +1,7 @@
-import { getCoursesFromAPI } from 'servisec';
 import { ADD_COURSE, GET_COURSES, DELETE_COURSE } from './actionTypes';
 
 const defaultCourses = {
-	courses: await getCoursesFromAPI(),
+	courses: [],
 };
 
 const coursesReducer = (state = defaultCourses, action) => {
@@ -10,7 +9,6 @@ const coursesReducer = (state = defaultCourses, action) => {
 		case ADD_COURSE:
 			return { ...state, courses: [...state.courses, action.payload] };
 		case GET_COURSES:
-			console.log(action.payload);
 			return { ...state, courses: action.payload };
 		case DELETE_COURSE:
 			return {

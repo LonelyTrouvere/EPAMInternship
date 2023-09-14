@@ -1,10 +1,10 @@
 import { LOGIN, LOGOUT } from './actionTypes';
 
 const defaultUser = {
-	isAuth: false,
-	name: '',
-	email: '',
-	token: '',
+	isAuth: localStorage.getItem('token') ? true : false,
+	name: JSON.parse(localStorage.getItem('user'))?.name || '',
+	email: JSON.parse(localStorage.getItem('user'))?.email || '',
+	token: localStorage.getItem('token') || '',
 };
 
 const userReducer = (state = defaultUser, action) => {
@@ -12,7 +12,12 @@ const userReducer = (state = defaultUser, action) => {
 		case LOGIN:
 			return { ...action.payload };
 		case LOGOUT:
-			return { ...defaultUser };
+			return {
+				isAuth: false,
+				name: '',
+				email: '',
+				token: '',
+			};
 		default:
 			return state;
 	}
