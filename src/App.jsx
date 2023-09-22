@@ -23,6 +23,7 @@ import { fetchAuthors } from 'store/authors/thunk';
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
 	const role = useSelector((state) => state.user.role);
+	const isAdmin = role === 'admin';
 	const dispatch = useDispatch();
 
 	dispatch(fetchUser());
@@ -41,8 +42,17 @@ const App = () => {
 					</Route>
 					<Route element={<ProtectedRoute token={isAuth} />}>
 						<Route path={COURSES_ROUTE} element={<CourseList />} />
-						<Route path={ADD_COURSE_ROUTE} element={<CourseForm />} />
 						<Route path={COURSE_ID_ROUTE} element={<CourseInfo />} />
+					</Route>
+					<Route
+						element={
+							<ProtectedRoute
+								redirect={COURSES_ROUTE}
+								token={isAuth && isAdmin}
+							/>
+						}
+					>
+						<Route path={ADD_COURSE_ROUTE} element={<CourseForm />} />
 					</Route>
 				</Routes>
 			</div>

@@ -8,7 +8,7 @@ import { Textarea } from 'components/common/Textarea/Textarea';
 import { COURSES_ROUTE } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAuthorAction } from 'store/authors/actionCreators';
-import { addCourseAction } from 'store/courses/actionCreators';
+import { addCourseThunk } from 'store/courses/thunk';
 
 const CourseForm = () => {
 	const authors = useSelector((state) => state.authors.authors);
@@ -81,7 +81,7 @@ const CourseForm = () => {
 					(date.getMonth() + 1) +
 					'/' +
 					date.getFullYear(),
-				duration: duration,
+				duration: parseInt(duration),
 				authors: courseAuthors.map((item) => item.id),
 			};
 
@@ -91,7 +91,7 @@ const CourseForm = () => {
 			setNewAuthor('');
 			setCourseAuthors([]);
 
-			dispatch(addCourseAction(newCourse));
+			dispatch(addCourseThunk(newCourse));
 			navigate(COURSES_ROUTE);
 		}
 	};

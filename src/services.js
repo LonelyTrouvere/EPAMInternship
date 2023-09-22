@@ -5,6 +5,35 @@ const getCoursesFromAPI = async () => {
 	return data.result;
 };
 
+const addCourse = async (course) => {
+	const response = await fetch(
+		`${process.env.REACT_APP_BASE_URL}/courses/add`,
+		{
+			method: 'POST',
+			body: JSON.stringify(course),
+			headers: {
+				'content-type': 'application/json',
+				Authorization: localStorage.getItem('token'),
+			},
+		}
+	);
+	const data = await response.json();
+
+	if (!response.ok) throw new Error(data.result);
+};
+
+const deleteCourse = async (id) => {
+	const response = await fetch(
+		`${process.env.REACT_APP_BASE_URL}/courses/${id}`,
+		{
+			method: 'DELETE',
+			headers: {
+				Authorization: localStorage.getItem('token'),
+			},
+		}
+	);
+};
+
 const getAuthorsFromAPI = async () => {
 	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/authors/all`);
 	const data = await response.json();
@@ -67,6 +96,8 @@ const registerUser = async (user) => {
 
 export {
 	getCoursesFromAPI,
+	addCourse,
+	deleteCourse,
 	getAuthorsFromAPI,
 	loginUser,
 	registerUser,
