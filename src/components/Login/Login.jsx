@@ -5,7 +5,7 @@ import { Button } from 'components/common/Button/Button';
 import { COURSES_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { useDispatch } from 'react-redux';
 import { loginAction } from 'store/user/actionCreators';
-import { loginUser } from 'servisec';
+import { loginUser } from 'services';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -39,7 +39,6 @@ const Login = () => {
 			};
 
 			localStorage.setItem('token', resultUser.token);
-			localStorage.setItem('user', JSON.stringify(data.user));
 			dispatch(loginAction(resultUser));
 
 			navigate(COURSES_ROUTE);

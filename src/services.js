@@ -12,6 +12,20 @@ const getAuthorsFromAPI = async () => {
 	return data.result;
 };
 
+const userMe = async (token) => {
+	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users/me`, {
+		method: 'GET',
+		headers: {
+			Authorization: token,
+		},
+	});
+	const data = await response.json();
+
+	if (!response.ok) throw new Error(data.result);
+
+	return data.result;
+};
+
 const loginUser = async (user) => {
 	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
 		method: 'POST',
@@ -42,4 +56,10 @@ const registerUser = async (user) => {
 	return data;
 };
 
-export { getCoursesFromAPI, getAuthorsFromAPI, loginUser, registerUser };
+export {
+	getCoursesFromAPI,
+	getAuthorsFromAPI,
+	loginUser,
+	registerUser,
+	userMe,
+};

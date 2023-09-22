@@ -17,28 +17,20 @@ import {
 	REGISTER_ROUTE,
 } from 'constants/routes';
 import { useEffect } from 'react';
-import { getAuthorsFromAPI, getCoursesFromAPI } from 'servisec';
+import { getAuthorsFromAPI, getCoursesFromAPI } from 'services';
 import { getCoursesAction } from 'store/courses/actionCreators';
 import { getAuthorsAction } from 'store/authors/actionCreators';
+import { fetchUser } from 'store/user/thunk';
+import { fetchCourses } from 'store/courses/thunk';
+import { fetchAuthors } from 'store/authors/thunk';
 
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		const fetchCourses = async () => {
-			const courses = await getCoursesFromAPI();
-			dispatch(getCoursesAction(courses));
-		};
-
-		const fetchAuthors = async () => {
-			const authors = await getAuthorsFromAPI();
-			dispatch(getAuthorsAction(authors));
-		};
-
-		fetchCourses();
-		fetchAuthors();
-	}, []);
+	dispatch(fetchUser());
+	dispatch(fetchCourses());
+	dispatch(fetchAuthors());
 
 	return (
 		<>
