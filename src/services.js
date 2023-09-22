@@ -26,6 +26,15 @@ const userMe = async (token) => {
 	return data.result;
 };
 
+const logout = async () => {
+	await fetch(`${process.env.REACT_APP_BASE_URL}/logout`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: localStorage.getItem('token'),
+		},
+	});
+};
+
 const loginUser = async (user) => {
 	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/login`, {
 		method: 'POST',
@@ -62,4 +71,5 @@ export {
 	loginUser,
 	registerUser,
 	userMe,
+	logout,
 };

@@ -16,16 +16,13 @@ import {
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
 } from 'constants/routes';
-import { useEffect } from 'react';
-import { getAuthorsFromAPI, getCoursesFromAPI } from 'services';
-import { getCoursesAction } from 'store/courses/actionCreators';
-import { getAuthorsAction } from 'store/authors/actionCreators';
 import { fetchUser } from 'store/user/thunk';
 import { fetchCourses } from 'store/courses/thunk';
 import { fetchAuthors } from 'store/authors/thunk';
 
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
+	const role = useSelector((state) => state.user.role);
 	const dispatch = useDispatch();
 
 	dispatch(fetchUser());
