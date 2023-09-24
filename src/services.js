@@ -20,6 +20,8 @@ const addCourse = async (course) => {
 	const data = await response.json();
 
 	if (!response.ok) throw new Error(data.result);
+
+	return data.result;
 };
 
 const deleteCourse = async (id) => {
@@ -37,6 +39,26 @@ const deleteCourse = async (id) => {
 const getAuthorsFromAPI = async () => {
 	const response = await fetch(`${process.env.REACT_APP_BASE_URL}/authors/all`);
 	const data = await response.json();
+
+	return data.result;
+};
+
+const addAuthor = async (author) => {
+	const response = await fetch(
+		`${process.env.REACT_APP_BASE_URL}/authors/add`,
+		{
+			method: 'POST',
+			body: JSON.stringify(author),
+			headers: {
+				'content-type': 'application/json',
+				Authorization: localStorage.getItem('token'),
+			},
+		}
+	);
+
+	const data = await response.json();
+
+	if (!response.ok) throw new Error(data.result);
 
 	return data.result;
 };
@@ -99,6 +121,7 @@ export {
 	addCourse,
 	deleteCourse,
 	getAuthorsFromAPI,
+	addAuthor,
 	loginUser,
 	registerUser,
 	userMe,

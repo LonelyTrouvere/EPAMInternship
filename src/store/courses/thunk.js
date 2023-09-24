@@ -14,8 +14,8 @@ const fetchCourses = () => {
 
 const addCourseThunk = (course) => {
 	return async (dispatch) => {
-		await addCourse(course);
-		dispatch(addCourseAction(course));
+		const data = await addCourse(course);
+		dispatch(addCourseAction(data));
 	};
 };
 

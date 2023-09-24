@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
-import { v4 } from 'uuid';
 import { useNavigate } from 'react-router';
 import { displayDuration } from 'utils/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
@@ -9,6 +8,7 @@ import { COURSES_ROUTE } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAuthorAction } from 'store/authors/actionCreators';
 import { addCourseThunk } from 'store/courses/thunk';
+import { addAuthorThunk } from 'store/authors/thunk';
 
 const CourseForm = () => {
 	const authors = useSelector((state) => state.authors.authors);
@@ -41,10 +41,9 @@ const CourseForm = () => {
 
 	const addNewAuthor = () => {
 		const newAuthor = {
-			id: v4(),
 			name: newAuthorName,
 		};
-		dispatch(addAuthorAction(newAuthor));
+		dispatch(addAuthorThunk(newAuthor));
 	};
 
 	const addCourseAuthor = (author) => {
@@ -72,7 +71,6 @@ const CourseForm = () => {
 		if (validation()) {
 			const date = new Date();
 			const newCourse = {
-				id: v4(),
 				title: title,
 				description: description,
 				creationDate:

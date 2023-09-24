@@ -1,5 +1,5 @@
-import { getAuthorsFromAPI } from 'services';
-import { getAuthorsAction } from './actionCreators';
+import { addAuthor, getAuthorsFromAPI } from 'services';
+import { addAuthorAction, getAuthorsAction } from './actionCreators';
 
 const fetchAuthors = () => {
 	return async (dispatch) => {
@@ -8,4 +8,11 @@ const fetchAuthors = () => {
 	};
 };
 
-export { fetchAuthors };
+const addAuthorThunk = (author) => {
+	return async (dispatch) => {
+		const data = await addAuthor(author);
+		dispatch(addAuthorAction(data));
+	};
+};
+
+export { fetchAuthors, addAuthorThunk };
