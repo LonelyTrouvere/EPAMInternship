@@ -33,7 +33,7 @@ const CourseCard = ({ course }) => {
 							if (index === authors.length - 1)
 								return <span key={item.id}>{item.name}</span>;
 							else return <span key={item.id}>{item.name}, </span>;
-						})}{' '}
+						})}
 				</p>
 				<p>
 					<b>Duration:</b> {hours}:{minutes} hours
@@ -64,7 +64,10 @@ const CourseCard = ({ course }) => {
 						</SmallButton>
 					)}
 					{isAdmin && (
-						<SmallButton className='w-14'>
+						<SmallButton
+							className='w-14'
+							onClick={() => navigate(`/courses/update/${course.id}`)}
+						>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								width='35px'

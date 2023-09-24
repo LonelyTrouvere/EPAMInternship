@@ -3,8 +3,6 @@ import { Button } from 'components/common/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { HOME_PAGE_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
-import { logoutAction } from 'store/user/actionCreators';
-import { logout } from 'services';
 import { logoutThunk } from 'store/user/thunk';
 
 const Header = () => {

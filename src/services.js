@@ -25,15 +25,30 @@ const addCourse = async (course) => {
 };
 
 const deleteCourse = async (id) => {
+	await fetch(`${process.env.REACT_APP_BASE_URL}/courses/${id}`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: localStorage.getItem('token'),
+		},
+	});
+};
+
+const updateCourse = async (id, course) => {
 	const response = await fetch(
 		`${process.env.REACT_APP_BASE_URL}/courses/${id}`,
 		{
-			method: 'DELETE',
+			method: 'PUT',
+			body: JSON.stringify(course),
 			headers: {
+				'content-type': 'application/json',
 				Authorization: localStorage.getItem('token'),
 			},
 		}
 	);
+	const data = await response.json();
+	if (!response.ok) throw new Error(data.result);
+
+	return data.result;
 };
 
 const getAuthorsFromAPI = async () => {
@@ -120,6 +135,7 @@ export {
 	getCoursesFromAPI,
 	addCourse,
 	deleteCourse,
+	updateCourse,
 	getAuthorsFromAPI,
 	addAuthor,
 	loginUser,

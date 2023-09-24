@@ -15,6 +15,7 @@ import {
 	HOME_PAGE_ROUTE,
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
+	UPDATE_COURSE_ROUTE,
 } from 'constants/routes';
 import { fetchUser } from 'store/user/thunk';
 import { fetchCourses } from 'store/courses/thunk';
@@ -53,6 +54,7 @@ const App = () => {
 						}
 					>
 						<Route path={ADD_COURSE_ROUTE} element={<CourseForm />} />
+						<Route path={UPDATE_COURSE_ROUTE} element={<CourseForm />} />
 					</Route>
 				</Routes>
 			</div>

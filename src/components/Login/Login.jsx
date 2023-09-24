@@ -4,9 +4,7 @@ import { Input } from 'components/common/Input/Input';
 import { Button } from 'components/common/Button/Button';
 import { COURSES_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { useDispatch } from 'react-redux';
-import { loginAction } from 'store/user/actionCreators';
-import { loginUser } from 'services';
-import { fetchUser, loginThunk } from 'store/user/thunk';
+import { loginThunk } from 'store/user/thunk';
 
 const Login = () => {
 	const [email, setEmail] = useState('');

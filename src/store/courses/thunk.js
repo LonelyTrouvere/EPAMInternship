@@ -1,8 +1,14 @@
-import { addCourse, deleteCourse, getCoursesFromAPI } from 'services';
+import {
+	addCourse,
+	deleteCourse,
+	getCoursesFromAPI,
+	updateCourse,
+} from 'services';
 import {
 	addCourseAction,
 	deleteCourseAction,
 	getCoursesAction,
+	updateCourseAction,
 } from './actionCreators';
 
 const fetchCourses = () => {
@@ -26,4 +32,12 @@ const deleteCourseThunk = (id) => {
 	};
 };
 
-export { fetchCourses, addCourseThunk, deleteCourseThunk };
+const updateCourseThunk = (id, course) => {
+	return async (dispatch) => {
+		const data = await updateCourse(id, course);
+		console.log(data);
+		dispatch(updateCourseAction(data));
+	};
+};
+
+export { fetchCourses, addCourseThunk, deleteCourseThunk, updateCourseThunk };
