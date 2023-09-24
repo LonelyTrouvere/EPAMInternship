@@ -1,10 +1,10 @@
 import { LOGIN, LOGOUT } from './actionTypes';
 
 const defaultUser = {
-	isAuth: localStorage.getItem('token') ? true : false,
+	isAuth: false,
 	name: '',
 	email: '',
-	token: localStorage.getItem('token') || '',
+	token: '',
 	role: '',
 };
 

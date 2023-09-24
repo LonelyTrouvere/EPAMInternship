@@ -6,6 +6,7 @@ import { COURSES_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { useDispatch } from 'react-redux';
 import { loginAction } from 'store/user/actionCreators';
 import { loginUser } from 'services';
+import { fetchUser, loginThunk } from 'store/user/thunk';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -30,16 +31,7 @@ const Login = () => {
 				email,
 			};
 
-			const data = await loginUser(user);
-
-			const resultUser = {
-				...data.user,
-				isAuth: true,
-				token: data.result,
-			};
-
-			localStorage.setItem('token', resultUser.token);
-			dispatch(loginAction(resultUser));
+			dispatch(loginThunk(user));
 
 			navigate(COURSES_ROUTE);
 		} catch (err) {

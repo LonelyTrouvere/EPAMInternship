@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HOME_PAGE_ROUTE, LOGIN_ROUTE, REGISTER_ROUTE } from 'constants/routes';
 import { logoutAction } from 'store/user/actionCreators';
 import { logout } from 'services';
+import { logoutThunk } from 'store/user/thunk';
 
 const Header = () => {
 	const user = useSelector((state) => state.user);
@@ -12,9 +13,7 @@ const Header = () => {
 	const navigate = useNavigate();
 
 	const handleLogout = () => {
-		logout();
-		localStorage.removeItem('token');
-		dispatch(logoutAction());
+		dispatch(logoutThunk());
 		navigate(LOGIN_ROUTE);
 	};
 
