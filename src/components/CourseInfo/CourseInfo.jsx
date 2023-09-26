@@ -21,7 +21,6 @@ const CourseInfo = () => {
 					navigate(COURSES_ROUTE);
 				}}
 			>
-				{' '}
 				Back to courses
 			</Button>
 			<div className='text-xl'>

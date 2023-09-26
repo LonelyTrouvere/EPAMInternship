@@ -1,27 +1,35 @@
 import { useState } from 'react';
 import { Button } from 'components/common/Button/Button';
 import { Input } from 'components/common/Input/Input';
-import { v4 } from 'uuid';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { displayDuration } from 'utils/displayDuration';
 import { Textarea } from 'components/common/Textarea/Textarea';
 import { COURSES_ROUTE } from 'constants/routes';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAuthorAction } from 'store/authors/actionCreators';
-import { addCourseAction } from 'store/courses/actionCreators';
+import { addCourseThunk, updateCourseThunk } from 'store/courses/thunk';
+import { addAuthorThunk } from 'store/authors/thunk';
+import { useCourseByID } from 'hooks/useCourseByID';
 
 const CourseForm = () => {
+	const { id } = useParams();
 	const authors = useSelector((state) => state.authors.authors);
+	const updateCourse = useCourseByID(id);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [title, setTitle] = useState('');
-	const [description, setDescription] = useState('');
+	const [title, setTitle] = useState(updateCourse.title || '');
+	const [description, setDescription] = useState(
+		updateCourse?.description || ''
+	);
 	const [newAuthorName, setNewAuthor] = useState('');
-	const [duration, setDuration] = useState(0);
-	const [courseAuthors, setCourseAuthors] = useState([]);
+	const [duration, setDuration] = useState(updateCourse.duration || 0);
+	const [courseAuthors, setCourseAuthors] = useState(
+		updateCourse.authors || []
+	);
 	const { hours, minutes } = displayDuration(duration);
+
+	console.log(duration);
 
 	const handleTitel = (e) => {
 		setTitle(e.target.value);
@@ -41,10 +49,9 @@ const CourseForm = () => {
 
 	const addNewAuthor = () => {
 		const newAuthor = {
-			id: v4(),
 			name: newAuthorName,
 		};
-		dispatch(addAuthorAction(newAuthor));
+		dispatch(addAuthorThunk(newAuthor));
 	};
 
 	const addCourseAuthor = (author) => {
@@ -52,7 +59,7 @@ const CourseForm = () => {
 	};
 
 	const removeAuthor = (author) => {
-		setCourseAuthors(courseAuthors.filter((item) => item.id !== author.id));
+		setCourseAuthors(courseAuthors.filter((item) => item !== author));
 	};
 
 	const validation = () => {
@@ -68,11 +75,10 @@ const CourseForm = () => {
 		return true;
 	};
 
-	const createCourse = () => {
+	const onCreateCourse = () => {
 		if (validation()) {
 			const date = new Date();
 			const newCourse = {
-				id: v4(),
 				title: title,
 				description: description,
 				creationDate:
@@ -81,8 +87,8 @@ const CourseForm = () => {
 					(date.getMonth() + 1) +
 					'/' +
 					date.getFullYear(),
-				duration: duration,
-				authors: courseAuthors.map((item) => item.id),
+				duration: parseInt(duration),
+				authors: courseAuthors,
 			};
 
 			setTitle('');
@@ -91,7 +97,27 @@ const CourseForm = () => {
 			setNewAuthor('');
 			setCourseAuthors([]);
 
-			dispatch(addCourseAction(newCourse));
+			dispatch(addCourseThunk(newCourse));
+			navigate(COURSES_ROUTE);
+		}
+	};
+
+	const onUpdateCourse = () => {
+		if (validation()) {
+			const updatedCourse = {
+				title: title,
+				description: description,
+				duration: parseInt(duration),
+				authors: courseAuthors,
+			};
+
+			setTitle('');
+			setDescription('');
+			setDuration('');
+			setNewAuthor('');
+			setCourseAuthors([]);
+
+			dispatch(updateCourseThunk(id, updatedCourse));
 			navigate(COURSES_ROUTE);
 		}
 	};
@@ -104,20 +130,22 @@ const CourseForm = () => {
 					type='text'
 					className='w-[32rem]'
 					placeholder='Enter title...'
+					value={title}
 					onChange={handleTitel}
 				/>
 				<Button
 					type='submit'
 					className='absolute right-0'
-					onClick={createCourse}
+					onClick={updateCourse ? onUpdateCourse : onCreateCourse}
 				>
-					Create course
+					{updateCourse ? 'Update course' : 'Create course'}
 				</Button>
 			</div>
 			<Textarea
 				labelText='Description'
 				placeholder='Enter description'
 				className='w-full h-32 mb-5'
+				value={description}
 				onChange={handleDescription}
 			/>
 			<div className='grid gap-8 grid-rows-2 grid-cols-2'>
@@ -137,7 +165,7 @@ const CourseForm = () => {
 				<div className='flex flex-col'>
 					<h3 className='font-bold text-2xl text-center mb-4'>Authors</h3>
 					{authors
-						.filter((item) => !courseAuthors.includes(item))
+						.filter((item) => !courseAuthors.includes(item.id))
 						.map((item) => {
 							return (
 								<div key={item.id} className='my-4 relative'>
@@ -145,7 +173,7 @@ const CourseForm = () => {
 									<Button
 										type='button'
 										className='absolute right-0'
-										onClick={() => addCourseAuthor(item)}
+										onClick={() => addCourseAuthor(item.id)}
 									>
 										Add author
 									</Button>
@@ -160,6 +188,7 @@ const CourseForm = () => {
 						type='number'
 						placeholder='Enter duration in minutes...'
 						className='w-[90%] mb-5'
+						value={duration}
 						onChange={handleDuration}
 					/>
 					<p className='text-3xl'>
@@ -173,20 +202,22 @@ const CourseForm = () => {
 					{!courseAuthors.length ? (
 						<h3 className='text-center'>List is empty</h3>
 					) : (
-						courseAuthors.map((item) => {
-							return (
-								<div key={item.id} className='my-4 relative'>
-									<p className='inline-block'>{item.name}</p>
-									<Button
-										type='button'
-										className='absolute right-0'
-										onClick={() => removeAuthor(item)}
-									>
-										Delete author
-									</Button>
-								</div>
-							);
-						})
+						authors
+							.filter((item) => courseAuthors.includes(item.id))
+							.map((item) => {
+								return (
+									<div key={item.id} className='my-4 relative'>
+										<p className='inline-block'>{item.name}</p>
+										<Button
+											type='button'
+											className='absolute right-0'
+											onClick={() => removeAuthor(item.id)}
+										>
+											Delete author
+										</Button>
+									</div>
+								);
+							})
 					)}
 				</div>
 			</div>

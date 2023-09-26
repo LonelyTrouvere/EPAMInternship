@@ -15,30 +15,21 @@ import {
 	HOME_PAGE_ROUTE,
 	LOGIN_ROUTE,
 	REGISTER_ROUTE,
+	UPDATE_COURSE_ROUTE,
 } from 'constants/routes';
-import { useEffect } from 'react';
-import { getAuthorsFromAPI, getCoursesFromAPI } from 'servisec';
-import { getCoursesAction } from 'store/courses/actionCreators';
-import { getAuthorsAction } from 'store/authors/actionCreators';
+import { fetchUser } from 'store/user/thunk';
+import { fetchCourses } from 'store/courses/thunk';
+import { fetchAuthors } from 'store/authors/thunk';
 
 const App = () => {
 	const isAuth = useSelector((state) => state.user.isAuth);
+	const role = useSelector((state) => state.user.role);
+	const isAdmin = role === 'admin';
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		const fetchCourses = async () => {
-			const courses = await getCoursesFromAPI();
-			dispatch(getCoursesAction(courses));
-		};
-
-		const fetchAuthors = async () => {
-			const authors = await getAuthorsFromAPI();
-			dispatch(getAuthorsAction(authors));
-		};
-
-		fetchCourses();
-		fetchAuthors();
-	}, []);
+	dispatch(fetchUser());
+	dispatch(fetchCourses());
+	dispatch(fetchAuthors());
 
 	return (
 		<>
@@ -52,8 +43,18 @@ const App = () => {
 					</Route>
 					<Route element={<ProtectedRoute token={isAuth} />}>
 						<Route path={COURSES_ROUTE} element={<CourseList />} />
-						<Route path={ADD_COURSE_ROUTE} element={<CourseForm />} />
 						<Route path={COURSE_ID_ROUTE} element={<CourseInfo />} />
+					</Route>
+					<Route
+						element={
+							<ProtectedRoute
+								redirect={COURSES_ROUTE}
+								token={isAuth && isAdmin}
+							/>
+						}
+					>
+						<Route path={ADD_COURSE_ROUTE} element={<CourseForm />} />
+						<Route path={UPDATE_COURSE_ROUTE} element={<CourseForm />} />
 					</Route>
 				</Routes>
 			</div>
